@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/track-it.iml" filepath="$PROJECT_DIR$/track-it.iml" />
+      <module fileurl="file:///Volumes/localdisk/localdisk/workspace/track-it/app/app.iml" filepath="/Volumes/localdisk/localdisk/workspace/track-it/app/app.iml" />
+      <module fileurl="file:///Volumes/localdisk/localdisk/workspace/track-it/track-it.iml" filepath="/Volumes/localdisk/localdisk/workspace/track-it/track-it.iml" />
     </modules>
   </component>
 </project>
