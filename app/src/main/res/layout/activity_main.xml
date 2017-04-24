@@ -24,6 +24,7 @@
             android:fontFamily="sans-serif-condensed"
             android:padding="5dp"
             android:text="My Habits"
+            android:textAllCaps="true"
             android:textColor="@color/accent_material_dark_1"
             android:textSize="30sp" />
 
