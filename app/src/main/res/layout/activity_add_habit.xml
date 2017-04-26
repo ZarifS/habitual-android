@@ -33,7 +33,7 @@
             android:layout_below="@+id/new_habit"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
-            android:id="@+id/linearLayout">
+            android:id="@+id/selection_layout">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -105,7 +105,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -119,6 +119,25 @@
                     android:textAlignment="viewStart"
                     android:textColor="@color/accent_material_dark_1"
                     android:textSize="20sp" />
+
+                <SeekBar
+                    android:id="@+id/target_seekbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.23"
+                    android:max="8" />
+
+                <TextView
+                    android:id="@+id/seekbar_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="10dp"
+                    android:text="OFF"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/accent_material_dark_1"
+                    android:textSize="20sp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -144,6 +163,7 @@
                     android:layout_weight="1">
 
                     <Switch
+                        android:id="@+id/reminder_switch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -154,9 +174,11 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:id="@+id/time_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center">
+                android:layout_gravity="center"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -167,17 +189,21 @@
                     <com.aigestudio.wheelpicker.WheelPicker
                         android:id="@+id/wheel_hours"
                         android:layout_width="wrap_content"
-                        android:layout_height="77dp"
+                        android:layout_height="118dp"
                         android:layout_centerInParent="true"
                         app:wheel_atmospheric="true"
                         app:wheel_curtain="true"
                         app:wheel_curtain_color="#28ffffff"
                         app:wheel_curved="true"
                         app:wheel_cyclic="true"
+                        app:wheel_data="@array/hours"
                         app:wheel_indicator="false"
                         app:wheel_item_align="center"
                         app:wheel_item_text_color="@color/accent_material_dark_1"
-                        app:wheel_item_text_size="18sp" />
+                        app:wheel_item_text_size="25sp"
+                        app:wheel_maximum_width_text="20dp"
+                        app:wheel_same_width="false"
+                        app:wheel_visible_item_count="4" />
 
                     <com.aigestudio.wheelpicker.WheelPicker
                         android:id="@+id/wheel_minutes"
@@ -189,10 +215,31 @@
                         app:wheel_curtain_color="#28ffffff"
                         app:wheel_curved="true"
                         app:wheel_cyclic="true"
+                        app:wheel_data="@array/minutes"
                         app:wheel_indicator="false"
                         app:wheel_item_align="center"
                         app:wheel_item_text_color="@color/accent_material_dark_1"
-                        app:wheel_item_text_size="18sp" />
+                        app:wheel_item_text_size="25dp"
+                        app:wheel_maximum_width_text="20dp"
+                        app:wheel_visible_item_count="4" />
+
+                    <com.aigestudio.wheelpicker.WheelPicker
+                        android:id="@+id/wheelPicker3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="118dp"
+                        android:layout_centerInParent="true"
+                        app:wheel_atmospheric="true"
+                        app:wheel_curtain="true"
+                        app:wheel_curtain_color="#28ffffff"
+                        app:wheel_curved="true"
+                        app:wheel_cyclic="false"
+                        app:wheel_data="@array/time"
+                        app:wheel_indicator="false"
+                        app:wheel_item_align="center"
+                        app:wheel_item_text_color="@color/accent_material_dark_1"
+                        app:wheel_item_text_size="25sp"
+                        app:wheel_maximum_width_text="20dp"
+                        app:wheel_visible_item_count="4" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -200,20 +247,21 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/confirm_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:layout_below="@+id/linearLayout"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="54dp">
+            android:layout_below="@+id/selection_layout"
+            android:layout_marginTop="54dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:layout_weight="1"
-                android:weightSum="2" >
+                android:orientation="vertical"
+                android:weightSum="2">
 
                 <Button
                     android:id="@+id/cancel_button"
