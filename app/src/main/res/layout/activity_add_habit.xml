@@ -126,14 +126,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1.23"
-                    android:max="8" />
+                    android:max="7" />
 
                 <TextView
                     android:id="@+id/seekbar_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="10dp"
-                    android:text="OFF"
                     android:textAlignment="textEnd"
                     android:textColor="@color/accent_material_dark_1"
                     android:textSize="20sp" />
