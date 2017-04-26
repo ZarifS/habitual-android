@@ -2,6 +2,6 @@
 <resources>
     <color name="accent_material_dark_1">#f1a90e</color>
     <color name="primary_material_dark">#2d2d2d</color>
-    <color name="text_hint">#f4c86a</color>
-    <color name="accent_material_dark_2">#8fffd740</color>
+    <color name="text_hint">#6effb516</color>
+    <color name="accent_material_dark_2">#eff9da63</color>
 </resources>
