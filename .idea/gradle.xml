@@ -8,9 +8,9 @@
         <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-2.14.1" />
         <option name="modules">
           <set>
-            <option value="/Volumes/localdisk/localdisk/workspace/track-it" />
-            <option value="/Volumes/localdisk/localdisk/workspace/track-it/WheelPicker-1.1.2" />
-            <option value="/Volumes/localdisk/localdisk/workspace/track-it/app" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/WheelPicker-1.1.2" />
+            <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
