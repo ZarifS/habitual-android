@@ -1,5 +1,6 @@
 package com.closedbracket.trackit;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,13 +18,21 @@ public class AddHabit extends AppCompatActivity {
     private View time;
     private SeekBar weeklyTarget;
     private TextView targetText;
+    private String repeatDays;
+    private TextView targetDays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
+        setRepeat("Daily"); //Default repeat is daily
         initSwitch();
         initSeekBar();
+    }
+
+    public void setRepeat (String repeat) {
+        targetDays = (TextView) findViewById(R.id.repeat_holder);
+        targetDays.setText(repeat);
     }
 
     public void initSwitch(){
@@ -76,7 +85,17 @@ public class AddHabit extends AppCompatActivity {
 
     public void repeatClick(View view){
         Intent intent = new Intent(this, Repeat.class);
-        startActivity(intent);
+        startActivityForResult(intent,1);
         Log.i("Repeat", "Bringing to next page");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        if (resultCode == Activity.RESULT_OK) {
+            repeatDays = intent.getStringExtra("result");
+            Log.i("Return:","Got back data " + repeatDays + " from repeat activity.");
+            setRepeat(repeatDays); // update repeat
+        }
     }
 }

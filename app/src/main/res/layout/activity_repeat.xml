@@ -252,6 +252,7 @@
             android:layout_gravity="end"
             android:layout_marginTop="50dp"
             android:background="@drawable/buttonbg"
+            android:onClick="setButton"
             android:text="Set"
             android:textColor="@color/accent_material_dark_2" />
     </RelativeLayout>

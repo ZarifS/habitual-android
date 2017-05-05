@@ -100,7 +100,6 @@
                     android:ems="10"
                     android:inputType="none|textPersonName"
                     android:onClick="repeatClick"
-                    android:text="Daily"
                     android:textAlignment="textStart"
                     android:textColor="@color/text_hint"
                     android:textSize="20sp" />

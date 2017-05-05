@@ -1,10 +1,14 @@
 package com.closedbracket.trackit;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -37,6 +41,31 @@ public class Repeat extends AppCompatActivity implements CompoundButton.OnChecke
         sunday.setOnCheckedChangeListener(this);
 
 
+    }
+
+    public void setButton (View view){
+        String result = getDaysString();
+        Log.i("Set Button:", "Clicked");
+        if(result == "") {
+            Toast.makeText(this, "Please select at least one day to repeat.", Toast.LENGTH_SHORT).show();
+            Log.i("Set Button:", "In If");
+        }
+        else {
+            Log.i("Set Button:", "Finishing activity.");
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("result", result);
+            setResult(Activity.RESULT_OK, returnIntent);
+            finish();
+        }
+    }
+
+    private String getDaysString() {
+        String res ="";
+        for(int i=0;i<days.size();i++){
+            res = res + days.get(i) + " ";
+        }
+        Log.i("getDaysString result:", res);
+        return res;
     }
 
     @Override
