@@ -62,12 +62,13 @@
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox"
+                    android:id="@+id/mon_checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
+                    android:checked="false"
                     android:duplicateParentState="false"
                     android:padding="5dp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -90,10 +91,10 @@
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox2"
+                    android:id="@+id/tues_checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
+                    android:checked="false"
                     android:duplicateParentState="false"
                     android:padding="5dp" />
             </LinearLayout>
@@ -118,10 +119,10 @@
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox3"
+                    android:id="@+id/wed_checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
+                    android:checked="false"
                     android:duplicateParentState="false"
                     android:padding="5dp" />
             </LinearLayout>
@@ -147,10 +148,10 @@
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox4"
+                    android:id="@+id/thurs_checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
+                    android:checked="false"
                     android:duplicateParentState="false"
                     android:padding="5dp" />
             </LinearLayout>
@@ -176,10 +177,10 @@
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox5"
+                    android:id="@+id/fri_checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
+                    android:checked="false"
                     android:duplicateParentState="false"
                     android:padding="5dp" />
             </LinearLayout>
@@ -205,10 +206,9 @@
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox6"
+                    android:id="@+id/sat_checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:duplicateParentState="false"
                     android:padding="5dp" />
             </LinearLayout>
@@ -234,10 +234,9 @@
                     android:textSize="18sp" />
 
                 <CheckBox
-                    android:id="@+id/checkBox7"
+                    android:id="@+id/sun_checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:duplicateParentState="false"
                     android:padding="5dp" />
             </LinearLayout>
@@ -253,7 +252,7 @@
             android:layout_gravity="end"
             android:layout_marginTop="50dp"
             android:background="@drawable/buttonbg"
-            android:text="BACK"
+            android:text="Set"
             android:textColor="@color/accent_material_dark_2" />
     </RelativeLayout>
 
