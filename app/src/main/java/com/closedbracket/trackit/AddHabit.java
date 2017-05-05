@@ -1,15 +1,14 @@
 package com.closedbracket.trackit;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class AddHabit extends AppCompatActivity {
@@ -76,6 +75,8 @@ public class AddHabit extends AppCompatActivity {
     }
 
     public void repeatClick(View view){
+        Intent intent = new Intent(this, Repeat.class);
+        startActivity(intent);
         Log.i("Repeat", "Bringing to next page");
     }
 }

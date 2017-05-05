@@ -16,13 +16,15 @@
 
         <TextView
             android:id="@+id/new_habit"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
+            android:background="@drawable/border2"
             android:fontFamily="sans-serif-condensed"
             android:padding="5dp"
             android:text="New Habit"
+            android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/accent_material_dark_1"
             android:textSize="30sp" />
