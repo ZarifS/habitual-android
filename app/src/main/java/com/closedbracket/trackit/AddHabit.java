@@ -7,9 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import java.util.Calendar;
 
 
 public class AddHabit extends AppCompatActivity {
@@ -20,6 +23,10 @@ public class AddHabit extends AppCompatActivity {
     private TextView targetText;
     private String repeatDays;
     private TextView targetDays;
+    private EditText nameHeader;
+    private String habitName;
+    private String habitTarget;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +37,12 @@ public class AddHabit extends AppCompatActivity {
         initSeekBar();
     }
 
-    public void setRepeat (String repeat) {
+    private void setRepeat (String repeat) {
         targetDays = (TextView) findViewById(R.id.repeat_holder);
         targetDays.setText(repeat);
     }
 
-    public void initSwitch(){
+    private void initSwitch(){
         time = findViewById(R.id.time_layout);
         mySwitch = (Switch) findViewById(R.id.reminder_switch);
         //attach a listener to check for changes in state
@@ -53,7 +60,7 @@ public class AddHabit extends AppCompatActivity {
         });
     }
 
-    public void initSeekBar(){
+    private void initSeekBar(){
         // Initialize the textview with OFF.
         targetText = (TextView) findViewById(R.id.seekbar_text);
         weeklyTarget = (SeekBar) findViewById(R.id.target_seekbar);
@@ -81,6 +88,62 @@ public class AddHabit extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void add(View view){
+        Log.i("Add Button Clicked", "Adding habit to database");
+        Calendar calendar = Calendar.getInstance();
+        int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
+        String day = dayToString(currentDay);
+        Log.i("Current day is", day);
+        setAttributes();
+        createNewHabit();
+    }
+
+    private void createNewHabit() {
+
+    }
+
+    private void setAttributes(){
+        nameHeader = (EditText) findViewById(R.id.habitName);
+        habitName = nameHeader.getText().toString();
+        Log.i("Habit name", habitName);
+        Log.i("Habit repeat", repeatDays);
+        if(targetText.getText().toString() == "OFF") {
+            habitTarget = "";
+        }
+        else {
+            habitTarget = targetText.getText().toString();
+        }
+        Log.i("Habit target", habitTarget);
+    }
+
+    private String dayToString (int day){
+        String res ="";
+        switch (day) {
+            case Calendar.SUNDAY:
+                res = "Su";
+                break;
+            case Calendar.MONDAY:
+                res = "M";
+                break;
+            case Calendar.TUESDAY:
+                res = "T";
+                break;
+            case Calendar.WEDNESDAY:
+                res = "W";
+                break;
+            case Calendar.THURSDAY:
+                res = "Th";
+                break;
+            case Calendar.FRIDAY:
+                res = "F";
+                break;
+            case Calendar.SATURDAY:
+                res = "S";
+                break;
+        }
+        return res;
     }
 
     public void repeatClick(View view){

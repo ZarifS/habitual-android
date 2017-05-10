@@ -1,7 +1,5 @@
 package com.closedbracket.trackit;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 import io.realm.RealmObject;
@@ -13,30 +11,35 @@ import io.realm.annotations.PrimaryKey;
 
 public class Habit extends RealmObject{
     @PrimaryKey
-    private static int id=0;
+    private long id;
     private String name;
-    private Calendar created = Calendar.getInstance(); //date of habit creation.
-    private ArrayList<Calendar> repeat;
-    private Calendar updated;
+    private Date created;
+    private String repeat;
+    private Date updated;
     private Date reminder;
     private int target;
     private int tracker;
 
-    public Habit (String name, ArrayList<Calendar> repeat, Date reminder, int target, int tracker){
-        id = id+1;
+    public Habit (){
+    }
+
+    public Habit(String name, String repeat, Date reminder, int target) {
         this.name = name;
         this.repeat = repeat;
-        this.reminder=reminder;
-        this.target=target;
-        this.tracker=tracker;
+        this.reminder = reminder;
+        this.target = target;
     }
 
-    public static int getId() {
+    public String getRepeat() {
+        return repeat;
+    }
+
+    public void setRepeat(String repeat) {
+        this.repeat = repeat;
+    }
+
+    public long getId() {
         return id;
-    }
-
-    public static void setId(int id) {
-        Habit.id = id;
     }
 
     public String getName() {
@@ -47,27 +50,19 @@ public class Habit extends RealmObject{
         this.name = name;
     }
 
-    public Calendar getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public void setCreated(Calendar created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
-    public ArrayList<Calendar> getRepeat() {
-        return repeat;
-    }
-
-    public void setRepeat(ArrayList<Calendar> repeat) {
-        this.repeat = repeat;
-    }
-
-    public Calendar getUpdated() {
+    public Date getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Calendar updated) {
+    public void setUpdated(Date updated) {
         this.updated = updated;
     }
 
@@ -97,17 +92,7 @@ public class Habit extends RealmObject{
 
     @Override
     public String toString() {
-        String temp;
-        String rep ="";
-        if(repeat.size() == 7){
-            rep = "Daily";
-        }
-        else{
-            for (int i=0; i<repeat.size(); i++){
-                rep = rep + repeat.get(i).get(Calendar.DAY_OF_WEEK) + " ";
-            }
-        }
-        temp = "Habit Name:" + getName() + ", Repeating: " + rep + ", Target: " + getTarget() + ", On track for: " + getTracker();
+        String temp = "Habit Name:" + getName() + ", Repeating: " + getRepeat() + ", Target: " + getTarget() + ", On track for: " + getTracker();
         return temp;
     }
 }

@@ -286,6 +286,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:background="@drawable/buttonbg"
+                    android:onClick="add"
                     android:text="Add"
                     android:textColor="@color/accent_material_dark_2" />
 
