@@ -23,11 +23,13 @@ public class Habit extends RealmObject{
     public Habit (){
     }
 
-    public Habit(String name, String repeat, Date reminder, int target) {
+    public Habit(String name, String repeat, int target) {
         this.name = name;
         this.repeat = repeat;
-        this.reminder = reminder;
+        //TODO - Add reminder functionality back
+//        this.reminder = reminder;
         this.target = target;
+        this.created = new Date();
     }
 
     public String getRepeat() {
@@ -40,6 +42,10 @@ public class Habit extends RealmObject{
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {

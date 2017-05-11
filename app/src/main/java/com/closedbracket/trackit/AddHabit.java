@@ -13,6 +13,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.Calendar;
+import java.util.Date;
+
+import io.realm.Realm;
 
 
 public class AddHabit extends AppCompatActivity {
@@ -21,18 +24,19 @@ public class AddHabit extends AppCompatActivity {
     private View time;
     private SeekBar weeklyTarget;
     private TextView targetText;
-    private String repeatDays;
+    private String repeatDays ="";
     private TextView targetDays;
-    private EditText nameHeader;
     private String habitName;
-    private String habitTarget;
+    private int habitTarget;
+    private Date habitReminder;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
-        setRepeat("Daily"); //Default repeat is daily
+        repeatDays="Daily";
+        setRepeat(repeatDays); //Default repeat is daily
         initSwitch();
         initSeekBar();
     }
@@ -101,21 +105,58 @@ public class AddHabit extends AppCompatActivity {
     }
 
     private void createNewHabit() {
+        Log.i("Creating New Habit", "Adding habit attributes");
+        Realm.init(this);
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        // increment index
+        Number currentIdNum = realm.where(Habit.class).max("id");
+        int nextId;
+        if(currentIdNum == null) {
+            nextId = 1;
+        } else {
+            nextId = currentIdNum.intValue() + 1;
+        }
+        Habit habit = realm.createObject(Habit.class, nextId);
+        habit.setCreated(new Date());
+        habit.setName(habitName);
+        habit.setRepeat(repeatDays);
+        habit.setTarget(habitTarget);
+        realm.commitTransaction();
 
+//        RealmAsyncTask transaction = realm.executeTransactionAsync(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm bgRealm) {
+//                Habit habit = bgRealm.createObject(Habit.class);
+//                habit.setName(habitName);
+//                habit.setRepeat(repeatDays);
+//                habit.setTarget(habitTarget);
+//            }
+//        }, null,null);
+
+        Log.i("Creating New Habit", "Added habit finished");
     }
 
     private void setAttributes(){
-        nameHeader = (EditText) findViewById(R.id.habitName);
+        EditText nameHeader = (EditText) findViewById(R.id.habitName);
         habitName = nameHeader.getText().toString();
         Log.i("Habit name", habitName);
         Log.i("Habit repeat", repeatDays);
         if(targetText.getText().toString() == "OFF") {
-            habitTarget = "";
+            habitTarget = 0;
         }
         else {
-            habitTarget = targetText.getText().toString();
+            habitTarget = Integer.parseInt(targetText.getText().toString());
         }
-        Log.i("Habit target", habitTarget);
+        Log.i("Habit target", Integer.toString(habitTarget));
+
+        // TODO - Get reminderds to be persisted with notifcations
+//        if (mySwitch.isChecked()){
+//            WheelPicker timeHour = (WheelPicker) findViewById(R.id.wheel_hours);
+//            WheelPicker timeMin = (WheelPicker) findViewById(R.id.wheel_minutes);
+//            WheelPicker timeDay = (WheelPicker) findViewById(R.id.wheel_time);
+//            timeHour.getCurrentItemPosition();
+//        }
     }
 
     private String dayToString (int day){

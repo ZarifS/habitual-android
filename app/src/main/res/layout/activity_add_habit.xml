@@ -224,7 +224,7 @@
                         app:wheel_visible_item_count="4" />
 
                     <com.aigestudio.wheelpicker.WheelPicker
-                        android:id="@+id/wheelPicker3"
+                        android:id="@+id/wheel_time"
                         android:layout_width="wrap_content"
                         android:layout_height="118dp"
                         android:layout_centerInParent="true"

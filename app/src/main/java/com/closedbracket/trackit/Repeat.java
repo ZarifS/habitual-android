@@ -60,7 +60,7 @@ public class Repeat extends AppCompatActivity implements CompoundButton.OnChecke
     }
 
     private String getDaysString() {
-        String res ="";
+        String res =" ";
         for(int i=0;i<days.size();i++){
             res = res + days.get(i) + " ";
         }
