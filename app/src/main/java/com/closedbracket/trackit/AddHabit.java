@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -102,6 +103,10 @@ public class AddHabit extends AppCompatActivity {
         Log.i("Current day is", day);
         setAttributes();
         createNewHabit();
+        Log.i("Add Button:", "Finishing activity.");
+        Intent returnIntent = new Intent();
+        setResult(Activity.RESULT_OK, returnIntent);
+        finish();
     }
 
     private void createNewHabit() {
@@ -133,7 +138,7 @@ public class AddHabit extends AppCompatActivity {
 //                habit.setTarget(habitTarget);
 //            }
 //        }, null,null);
-
+        Toast.makeText(this, "Habit Added!", Toast.LENGTH_SHORT).show();
         Log.i("Creating New Habit", "Added habit finished");
     }
 

@@ -15,7 +15,6 @@ public class Habit extends RealmObject{
     private String name;
     private Date created;
     private String repeat;
-    private Date updated;
     private Date reminder;
     private int target;
     private int tracker;
@@ -62,14 +61,6 @@ public class Habit extends RealmObject{
 
     public void setCreated(Date created) {
         this.created = created;
-    }
-
-    public Date getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(Date updated) {
-        this.updated = updated;
     }
 
     public Date getReminder() {
