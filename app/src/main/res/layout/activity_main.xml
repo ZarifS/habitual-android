@@ -40,11 +40,11 @@
         </LinearLayout>
 
         <ListView
+            android:id="@+id/habits_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
-            android:layout_marginTop="20dp"
-            android:padding="10dp" />
+            android:layout_marginTop="20dp" />
 
         <LinearLayout
             android:id="@+id/add"

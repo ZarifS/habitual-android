@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ListView;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -13,7 +14,8 @@ import io.realm.RealmResults;
 public class MainActivity extends AppCompatActivity {
 
     private RealmResults<Habit> habitsResults;
-    public Realm realm;
+    private Realm realm;
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
         for(Habit habit : habitsResults) {
             Log.i("Habit name", habit.toString());
         }
+        initListView();
+    }
+
+    private void initListView() {
+        HabitAdapter adapter = new HabitAdapter(this,habitsResults);
+        mListView = (ListView) findViewById(R.id.habits_list);
+        mListView.setAdapter(adapter);
     }
 
     public void addHabit(View view){
@@ -39,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK) {
             Log.i("Return to Main Habit:","Got back data from AddHabit activity.");
         }
+        getHabits();
+        initListView();
     }
 
     private void getHabits(){
