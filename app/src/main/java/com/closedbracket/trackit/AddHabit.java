@@ -124,20 +124,15 @@ public class AddHabit extends AppCompatActivity {
         }
         Habit habit = realm.createObject(Habit.class, nextId);
         habit.setCreated(new Date());
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.DATE, -1);
+        Date dateBeforeCreated = cal.getTime();
+        habit.setUpdated(dateBeforeCreated);
         habit.setName(habitName);
         habit.setRepeat(repeatDays);
         habit.setTarget(habitTarget);
         realm.commitTransaction();
-
-//        RealmAsyncTask transaction = realm.executeTransactionAsync(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm bgRealm) {
-//                Habit habit = bgRealm.createObject(Habit.class);
-//                habit.setName(habitName);
-//                habit.setRepeat(repeatDays);
-//                habit.setTarget(habitTarget);
-//            }
-//        }, null,null);
         Toast.makeText(this, "Habit Added!", Toast.LENGTH_SHORT).show();
         Log.i("Creating New Habit", "Added habit finished");
     }

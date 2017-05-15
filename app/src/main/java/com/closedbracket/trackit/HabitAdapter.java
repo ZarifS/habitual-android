@@ -1,6 +1,7 @@
 package com.closedbracket.trackit;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.util.Date;
+
+import io.realm.Realm;
 import io.realm.RealmResults;
 
 /**
@@ -20,6 +24,7 @@ public class HabitAdapter extends BaseAdapter{
     private Context mContext;
     private LayoutInflater mInflater;
     private RealmResults<Habit> mDataSource;
+    private final int MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
 
     public HabitAdapter(Context context, RealmResults<Habit> items) {
         mContext = context;
@@ -43,7 +48,7 @@ public class HabitAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder;
 
@@ -75,12 +80,42 @@ public class HabitAdapter extends BaseAdapter{
 
 
         //Get corresponding recipe for row
-        Habit habit = (Habit) getItem(position);
+        Habit habit = getItem(position);
 
         // Update row view's textviews to display recipe information
         habitName.setText(habit.getName());
         habitTracker.setText(Integer.toString(habit.getTracker()));
+        habitChecked.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("In on Click:", ""+position+"");
+                updateHabit(position);
+            }
+        });
         return convertView;
+    }
+
+    public void updateHabit(int position){
+        Date currentDate = new Date();
+        Date updatedDate = mDataSource.get(position).getUpdated();
+        Realm.init(mContext);
+        Realm realm = Realm.getDefaultInstance();
+        realm.beginTransaction();
+        if(!isSameDay(currentDate, updatedDate)){
+            mDataSource.get(position).setTracker(mDataSource.get(position).getTracker()+1);
+            mDataSource.get(position).setUpdated(currentDate);
+        }
+        realm.commitTransaction();
+    }
+
+    public boolean isSameDay(Date date1, Date date2) {
+
+        // Strip out the time part of each date.
+        long julianDayNumber1 = date1.getTime() / MILLIS_PER_DAY;
+        long julianDayNumber2 = date2.getTime() / MILLIS_PER_DAY;
+
+        // If they now are equal then it is the same day.
+        return julianDayNumber1 == julianDayNumber2;
     }
 
     private static class ViewHolder {

@@ -20,13 +20,14 @@
             android:layout_weight="1"
             android:padding="10dp"
             android:text="habit"
+            android:textAllCaps="true"
             android:textColor="@color/accent_material_dark_1"
             android:textSize="18sp" />
 
         <Button
             android:id="@+id/habitlist_tracker"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="@drawable/accent"
             android:text="7"
@@ -34,8 +35,8 @@
 
         <ImageButton
             android:id="@+id/habitlist_checked"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="@drawable/green"
             app:srcCompat="@drawable/checkmark" />

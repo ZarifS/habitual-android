@@ -14,6 +14,8 @@ public class Habit extends RealmObject{
     private long id;
     private String name;
     private Date created;
+    private Date updated;
+    //TODO - Create boolean field to track updates?
     private String repeat;
     private Date reminder;
     private int target;
@@ -29,6 +31,14 @@ public class Habit extends RealmObject{
 //        this.reminder = reminder;
         this.target = target;
         this.created = new Date();
+    }
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 
     public String getRepeat() {
