@@ -79,12 +79,24 @@ public class HabitAdapter extends BaseAdapter{
         ImageButton habitChecked = holder.habitChecked;
 
 
-        //Get corresponding recipe for row
+        //Get corresponding habit for row
         Habit habit = getItem(position);
 
-        // Update row view's textviews to display recipe information
+        // Update row view's textviews to display habit information
         habitName.setText(habit.getName());
-        habitTracker.setText(Integer.toString(habit.getTracker()));
+
+        //Set habit tracker to show either tracker/target or just target
+        if(habit.getTarget() != 0) {
+            String target = Integer.toString(habit.getTarget());
+            String tracker = Integer.toString(habit.getTracker());
+            habitTracker.setText(tracker+"/"+target);
+        }
+        else habitTracker.setText(Integer.toString(habit.getTracker()));
+
+        if (isSameDay(position)){
+            habitChecked.setBackgroundResource(R.drawable.green);
+        }
+        else habitChecked.setBackgroundResource(R.drawable.grey); //if habit has been updated today, set color to green, else set to grey
         habitChecked.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,23 +108,27 @@ public class HabitAdapter extends BaseAdapter{
     }
 
     public void updateHabit(int position){
-        Date currentDate = new Date();
-        Date updatedDate = mDataSource.get(position).getUpdated();
         Realm.init(mContext);
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        if(!isSameDay(currentDate, updatedDate)){
+        if(!isSameDay(position)){ //If the habit hasn't already been updated today
             mDataSource.get(position).setTracker(mDataSource.get(position).getTracker()+1);
-            mDataSource.get(position).setUpdated(currentDate);
+            mDataSource.get(position).setUpdated(new Date()); //update updated date
         }
+//        else if (isSameDay(currentDate,updatedDate) && mDataSource.get(position).isHasBeenUpdated()) {  //toggle functionality for same day updating
+//            mDataSource.get(position).setTracker(mDataSource.get(position).getTracker()-1);
+//            mDataSource.get(position).setUpdated(updatedDate); //reset updated day to previous updated date
+//            mDataSource.get(position).setHasBeenUpdated(false);
+//        }
         realm.commitTransaction();
     }
 
-    public boolean isSameDay(Date date1, Date date2) {
-
+    public boolean isSameDay (int position){
+        Date currentDate = new Date();
+        Date updatedDate = mDataSource.get(position).getUpdated();
         // Strip out the time part of each date.
-        long julianDayNumber1 = date1.getTime() / MILLIS_PER_DAY;
-        long julianDayNumber2 = date2.getTime() / MILLIS_PER_DAY;
+        long julianDayNumber1 = currentDate.getTime() / MILLIS_PER_DAY;
+        long julianDayNumber2 = updatedDate.getTime() / MILLIS_PER_DAY;
 
         // If they now are equal then it is the same day.
         return julianDayNumber1 == julianDayNumber2;

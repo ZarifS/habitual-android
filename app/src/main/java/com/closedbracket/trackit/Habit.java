@@ -15,23 +15,10 @@ public class Habit extends RealmObject{
     private String name;
     private Date created;
     private Date updated;
-    //TODO - Create boolean field to track updates?
     private String repeat;
     private Date reminder;
     private int target;
     private int tracker;
-
-    public Habit (){
-    }
-
-    public Habit(String name, String repeat, int target) {
-        this.name = name;
-        this.repeat = repeat;
-        //TODO - Add reminder functionality back
-//        this.reminder = reminder;
-        this.target = target;
-        this.created = new Date();
-    }
 
     public Date getUpdated() {
         return updated;

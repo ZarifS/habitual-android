@@ -38,7 +38,7 @@
             android:layout_width="45dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="@drawable/green"
+            android:background="@drawable/grey"
             app:srcCompat="@drawable/checkmark" />
 
     </LinearLayout>
