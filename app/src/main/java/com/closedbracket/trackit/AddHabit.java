@@ -97,10 +97,10 @@ public class AddHabit extends AppCompatActivity {
 
     public void add(View view){
         Log.i("Add Button Clicked", "Adding habit to database");
-        Calendar calendar = Calendar.getInstance();
-        int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
-        String day = dayToString(currentDay);
-        Log.i("Current day is", day);
+//        Calendar calendar = Calendar.getInstance();
+//        int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
+//        String day = dayToString(currentDay);
+//        Log.i("Current day is", day);
         setAttributes();
         createNewHabit();
         Log.i("Add Button:", "Finishing activity.");
@@ -159,33 +159,7 @@ public class AddHabit extends AppCompatActivity {
 //        }
     }
 
-    private String dayToString (int day){
-        String res ="";
-        switch (day) {
-            case Calendar.SUNDAY:
-                res = "Su";
-                break;
-            case Calendar.MONDAY:
-                res = "M";
-                break;
-            case Calendar.TUESDAY:
-                res = "T";
-                break;
-            case Calendar.WEDNESDAY:
-                res = "W";
-                break;
-            case Calendar.THURSDAY:
-                res = "Th";
-                break;
-            case Calendar.FRIDAY:
-                res = "F";
-                break;
-            case Calendar.SATURDAY:
-                res = "S";
-                break;
-        }
-        return res;
-    }
+
 
     public void repeatClick(View view){
         Intent intent = new Intent(this, Repeat.class);
