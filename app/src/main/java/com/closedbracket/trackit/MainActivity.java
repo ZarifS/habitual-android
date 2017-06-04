@@ -103,27 +103,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetTracker(){
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-        String isUpdated = sharedPref.getString("isUpdated", "No");
-        Calendar calendar = Calendar.getInstance(); // get current day
-        int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        String day = dayToString(currentDay);
-        if (day.equals("Su") && isUpdated.equals("No")){
-            realm.executeTransaction(new Realm.Transaction() {
-                @Override
-                public void execute(Realm realm) {
-                    for(Habit habit : habitsResults) {
-                        habit.setTracker(0);
+        Calendar cal = Calendar.getInstance();
+        int currentWeekOfYear = cal.get(Calendar.WEEK_OF_YEAR);
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        int weekOfYear = sharedPreferences.getInt("weekOfYear", 0);
+
+        if(weekOfYear != currentWeekOfYear){ //different week
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("weekOfYear", currentWeekOfYear);
+            editor.apply();
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        for (Habit habit : habitsResults) {
+                            habit.setTracker(0);
+                        }
                     }
-                }
-            });
-            editor.putString("isUpdated", "Yes");
-            Log.i("resetTracker", "Resetting tracker is happening");
+                });
         }
-        else if (!day.equals("Su")){ //Any other day resets the isUpdated back to no, except sunday
-            editor.putString("isUpdated", "No");
-        }
-        editor.apply();
     }
 }

@@ -111,15 +111,11 @@ public class HabitAdapter extends BaseAdapter{
         Realm.init(mContext);
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
+//        mDataSource.get(position).setTracker(mDataSource.get(position).getTracker()+1);
         if(!isSameDay(position)){ //If the habit hasn't already been updated today
             mDataSource.get(position).setTracker(mDataSource.get(position).getTracker()+1);
             mDataSource.get(position).setUpdated(new Date()); //update updated date
         }
-//        else if (isSameDay(currentDate,updatedDate) && mDataSource.get(position).isHasBeenUpdated()) {  //toggle functionality for same day updating
-//            mDataSource.get(position).setTracker(mDataSource.get(position).getTracker()-1);
-//            mDataSource.get(position).setUpdated(updatedDate); //reset updated day to previous updated date
-//            mDataSource.get(position).setHasBeenUpdated(false);
-//        }
         realm.commitTransaction();
     }
 
