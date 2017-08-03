@@ -20,16 +20,17 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border2"
-            android:orientation="horizontal">
+            android:elevation="10dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/habit"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_weight="1"
+                android:elevation="10dp"
                 android:fontFamily="sans-serif-condensed"
                 android:padding="5dp"
                 android:text="My Habits"
@@ -37,14 +38,21 @@
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
                 android:textSize="30sp" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/colorAccent" />
         </LinearLayout>
 
         <ListView
             android:id="@+id/habits_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title"
-            android:layout_marginTop="2dp" />
+            android:layout_above="@+id/add"
+            android:layout_below="@+id/title" />
 
         <LinearLayout
             android:id="@+id/add"
@@ -53,6 +61,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="false"
             android:background="@drawable/accent"
+            android:elevation="5dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="1">

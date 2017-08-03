@@ -30,6 +30,7 @@ public class HabitAdapter extends BaseSwipeAdapter{
     private Context mContext;
     private RealmResults<Habit> mDataSource;
     private Realm realm;
+    private SwipeLayout swipeLayout;
 
     public HabitAdapter(Context context, RealmResults<Habit> items) {
         mContext = context;
@@ -60,7 +61,7 @@ public class HabitAdapter extends BaseSwipeAdapter{
     @Override
     public View generateView(final int position, final ViewGroup parent) {
         View v = LayoutInflater.from(mContext).inflate(R.layout.list_item_habit, null);
-        SwipeLayout swipeLayout = (SwipeLayout)v.findViewById(getSwipeLayoutResourceId(position));
+        swipeLayout = (SwipeLayout)v.findViewById(getSwipeLayoutResourceId(position));
         swipeLayout.addSwipeListener(new SimpleSwipeListener() {
             @Override
             public void onOpen(SwipeLayout layout) {
@@ -70,6 +71,7 @@ public class HabitAdapter extends BaseSwipeAdapter{
         v.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                closeAllItems();
                 deleteHabit(position);
             }
         });
