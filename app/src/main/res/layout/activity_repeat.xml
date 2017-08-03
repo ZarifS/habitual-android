@@ -38,7 +38,7 @@
                     android:text="REPEAT"
                     android:textAlignment="center"
                     android:textAllCaps="true"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textSize="30sp" />
             </LinearLayout>
 
@@ -58,7 +58,7 @@
                     android:padding="10dp"
                     android:text="Monday"
                     android:textAllCaps="true"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp" />
 
                 <CheckBox
@@ -87,7 +87,7 @@
                     android:padding="10dp"
                     android:text="Tuesday"
                     android:textAllCaps="true"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp" />
 
                 <CheckBox
@@ -115,7 +115,7 @@
                     android:padding="10dp"
                     android:text="Wednesday"
                     android:textAllCaps="true"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp" />
 
                 <CheckBox
@@ -144,7 +144,7 @@
                     android:padding="10dp"
                     android:text="Thursday"
                     android:textAllCaps="true"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp" />
 
                 <CheckBox
@@ -173,7 +173,7 @@
                     android:padding="10dp"
                     android:text="Friday"
                     android:textAllCaps="true"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp" />
 
                 <CheckBox
@@ -202,7 +202,7 @@
                     android:padding="10dp"
                     android:text="Saturday"
                     android:textAllCaps="true"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp" />
 
                 <CheckBox
@@ -230,7 +230,7 @@
                     android:padding="10dp"
                     android:text="Sunday"
                     android:textAllCaps="true"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textSize="18sp" />
 
                 <CheckBox
@@ -254,7 +254,7 @@
             android:background="@drawable/buttonbg"
             android:onClick="setButton"
             android:text="Set"
-            android:textColor="@color/accent_material_dark_2" />
+            android:textColor="@color/colorAccentLight" />
     </RelativeLayout>
 
 </RelativeLayout>

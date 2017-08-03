@@ -35,7 +35,7 @@
                 android:text="My Habits"
                 android:textAlignment="center"
                 android:textAllCaps="true"
-                android:textColor="@color/accent_material_dark_1"
+                android:textColor="@color/colorAccent"
                 android:textSize="30sp" />
         </LinearLayout>
 

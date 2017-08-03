@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="accent_material_dark_1">#f1a90e</color>
-    <color name="primary_material_dark">#2d2d2d</color>
+    <color name="colorAccent">#f1a90e</color>
+    <color name="colorPrimaryDark">#2d2d2d</color>
+    <color name="colorPrimary">#424242</color>
     <color name="text_hint">#6effb516</color>
-    <color name="accent_material_dark_2">#eff9da63</color>
+    <color name="colorAccentLight">#eff9da63</color>
 </resources>

@@ -26,7 +26,7 @@
             android:text="New Habit"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:textColor="@color/accent_material_dark_1"
+            android:textColor="@color/colorAccent"
             android:textSize="30sp" />
 
         <LinearLayout
@@ -51,7 +51,7 @@
                     android:padding="10dp"
                     android:text="NAME"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
                 <EditText
@@ -65,7 +65,7 @@
                     android:hint="Read, Exercise .."
                     android:inputType="textPersonName"
                     android:textAllCaps="false"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textColorHint="@color/text_hint"
                     android:textColorLink="@android:color/background_light"
                     android:textSize="20sp" />
@@ -88,7 +88,7 @@
                     android:padding="10dp"
                     android:text="REPEAT"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
                 <TextView
@@ -118,7 +118,7 @@
                     android:padding="10dp"
                     android:text="WEEKLY TARGET"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
                 <SeekBar
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:paddingRight="10dp"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -154,7 +154,7 @@
                     android:padding="10dp"
                     android:text="REMINDERS"
                     android:textAlignment="viewStart"
-                    android:textColor="@color/accent_material_dark_1"
+                    android:textColor="@color/colorAccent"
                     android:textSize="20sp" />
 
                 <RelativeLayout
@@ -199,7 +199,7 @@
                         app:wheel_data="@array/hours"
                         app:wheel_indicator="false"
                         app:wheel_item_align="center"
-                        app:wheel_item_text_color="@color/accent_material_dark_1"
+                        app:wheel_item_text_color="@color/colorAccent"
                         app:wheel_item_text_size="25sp"
                         app:wheel_maximum_width_text="20dp"
                         app:wheel_same_width="false"
@@ -218,7 +218,7 @@
                         app:wheel_data="@array/minutes"
                         app:wheel_indicator="false"
                         app:wheel_item_align="center"
-                        app:wheel_item_text_color="@color/accent_material_dark_1"
+                        app:wheel_item_text_color="@color/colorAccent"
                         app:wheel_item_text_size="25dp"
                         app:wheel_maximum_width_text="20dp"
                         app:wheel_visible_item_count="4" />
@@ -236,7 +236,7 @@
                         app:wheel_data="@array/time"
                         app:wheel_indicator="false"
                         app:wheel_item_align="center"
-                        app:wheel_item_text_color="@color/accent_material_dark_1"
+                        app:wheel_item_text_color="@color/colorAccent"
                         app:wheel_item_text_size="25sp"
                         app:wheel_maximum_width_text="20dp"
                         app:wheel_visible_item_count="4" />
@@ -270,7 +270,7 @@
                     android:layout_gravity="end"
                     android:background="@drawable/buttonbg"
                     android:text="Cancel"
-                    android:textColor="@color/accent_material_dark_2" />
+                    android:textColor="@color/colorAccentLight" />
 
             </LinearLayout>
 
@@ -288,7 +288,7 @@
                     android:background="@drawable/buttonbg"
                     android:onClick="add"
                     android:text="Add"
-                    android:textColor="@color/accent_material_dark_2" />
+                    android:textColor="@color/colorAccentLight" />
 
             </LinearLayout>
 

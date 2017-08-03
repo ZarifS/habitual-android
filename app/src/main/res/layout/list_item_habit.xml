@@ -1,7 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<com.daimajia.swipe.SwipeLayout xmlns:swipe="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    swipe:leftEdgeSwipeOffset="0dp"
+    swipe:rightEdgeSwipeOffset="0dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:tag="Bottom3"
+        android:weightSum="2">
+
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:padding="5dp"
+            swipe:srcCompat="@drawable/delete" />
+
+        <ImageButton
+            android:id="@+id/edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:padding="5dp"
+            swipe:srcCompat="@drawable/edit" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +53,7 @@
             android:padding="10dp"
             android:text="habit"
             android:textAllCaps="true"
-            android:textColor="@color/accent_material_dark_1"
+            android:textColor="@color/colorAccent"
             android:textSize="18sp" />
 
         <Button
@@ -39,8 +71,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="@drawable/grey"
-            app:srcCompat="@drawable/checkmark" />
-
+            swipe:srcCompat="@drawable/checkmark"></ImageButton>
     </LinearLayout>
 
-</RelativeLayout>
+</com.daimajia.swipe.SwipeLayout>

@@ -5,7 +5,7 @@
     android:insetRight="-1dp">
 
     <shape android:shape="rectangle">
-        <stroke android:width=".5dp" android:color="@color/accent_material_dark_1" />
+        <stroke android:width=".5dp" android:color="@color/colorAccent" />
         <solid android:color="#0000000f" />
     </shape>
 </inset>

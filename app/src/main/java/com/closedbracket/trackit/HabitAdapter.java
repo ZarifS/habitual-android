@@ -5,10 +5,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+import com.daimajia.swipe.SimpleSwipeListener;
+import com.daimajia.swipe.SwipeLayout;
+import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
 import java.util.Date;
 
@@ -19,17 +25,16 @@ import io.realm.RealmResults;
  * Created by Zarif on 2017-05-13.
  */
 
-public class HabitAdapter extends BaseAdapter{
+public class HabitAdapter extends BaseSwipeAdapter{
 
     private Context mContext;
-    private LayoutInflater mInflater;
     private RealmResults<Habit> mDataSource;
-    private final int MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
+    private Realm realm;
 
     public HabitAdapter(Context context, RealmResults<Habit> items) {
         mContext = context;
         mDataSource = items;
-        mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        realm = Realm.getDefaultInstance();
     }
 
     @Override
@@ -48,16 +53,53 @@ public class HabitAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public int getSwipeLayoutResourceId(int position) {
+        return R.id.swipe;
+    }
+
+    @Override
+    public View generateView(final int position, final ViewGroup parent) {
+        View v = LayoutInflater.from(mContext).inflate(R.layout.list_item_habit, null);
+        SwipeLayout swipeLayout = (SwipeLayout)v.findViewById(getSwipeLayoutResourceId(position));
+        swipeLayout.addSwipeListener(new SimpleSwipeListener() {
+            @Override
+            public void onOpen(SwipeLayout layout) {
+                YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.delete));
+            }
+        });
+        v.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteHabit(position);
+            }
+        });
+        v.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("Edit Button", "Clicked");
+            }
+        });
+        return v;
+    }
+
+    private void deleteHabit(int position) {
+        realm.beginTransaction();
+        Habit habit = mDataSource.get(position);
+        Log.i("DeleteHabit:", "Deleting " + habit.getName());
+        habit.deleteFromRealm();
+        Log.i("DeleteHabit:", "Deleted habit");
+        realm.commitTransaction();
+        Toast.makeText(mContext, "Habit Deleted.", Toast.LENGTH_SHORT).show();
+    }
+
+
+    @Override
+    public void fillValues(final int position, View convertView) {
 
         ViewHolder holder;
 
         // check if the view already exists if so, no need to inflate and findViewById again!
-        if (convertView == null) {
-
-            // Inflate the custom row layout from your XML.
-            convertView = mInflater.inflate(R.layout.list_item_habit, parent, false);
-
+        if (convertView.getTag()==null) {
             // create a new "Holder" with subviews
             holder = new ViewHolder();
             holder.habitName= (TextView) convertView.findViewById(R.id.habitlist_name);
@@ -68,7 +110,6 @@ public class HabitAdapter extends BaseAdapter{
             convertView.setTag(holder);
         }
         else {
-
             // skip all the expensive inflation/findViewById and just get the holder you already made
             holder = (ViewHolder) convertView.getTag();
         }
@@ -104,10 +145,9 @@ public class HabitAdapter extends BaseAdapter{
                 updateHabit(position);
             }
         });
-        return convertView;
     }
 
-    public void updateHabit(int position){
+    private void updateHabit(int position){
         Realm.init(mContext);
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
@@ -119,10 +159,11 @@ public class HabitAdapter extends BaseAdapter{
         realm.commitTransaction();
     }
 
-    public boolean isSameDay (int position){
+    private boolean isSameDay(int position){
         Date currentDate = new Date();
         Date updatedDate = mDataSource.get(position).getUpdated();
         // Strip out the time part of each date.
+        int MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
         long julianDayNumber1 = currentDate.getTime() / MILLIS_PER_DAY;
         long julianDayNumber2 = updatedDate.getTime() / MILLIS_PER_DAY;
 
