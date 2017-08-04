@@ -278,7 +278,7 @@
                 android:background="@drawable/buttonbg"
                 android:onClick="add"
                 android:text="Add"
-                android:textColor="@color/colorAccentLight" />
+                android:textColor="@color/colorAccent" />
         </LinearLayout>
 
     </RelativeLayout>
