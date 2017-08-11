@@ -15,11 +15,15 @@ public class Habit extends RealmObject{
     private String name;
     private Date created;
     private Date updated;
+    private Date lastUpdated;
     private String repeat;
     private Date reminder;
     private int target;
     private int tracker;
+    private int change;
+    private int completion;
 
+    //All of the getters and setters.
     public Date getUpdated() {
         return updated;
     }
@@ -84,6 +88,31 @@ public class Habit extends RealmObject{
         this.tracker = tracker;
     }
 
+    public int getChange() {
+        return change;
+    }
+
+    public void setChange(int change) {
+        this.change = change;
+    }
+
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public int getCompletion() {
+        return completion;
+    }
+
+    public void setCompletion(int completion) {
+        this.completion = completion;
+    }
+
+    //To string override to see habit info.
     @Override
     public String toString() {
         String temp = "Habit Name:" + getName() + ", Repeating: " + getRepeat() + ", Target: " + getTarget() + ", On track for: " + getTracker();

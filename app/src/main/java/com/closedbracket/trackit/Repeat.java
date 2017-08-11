@@ -46,6 +46,7 @@ public class Repeat extends AppCompatActivity implements CompoundButton.OnChecke
     public void setButton (View view){
         String result = getDaysString();
         Log.i("Set Button:", "Clicked");
+        Log.i("Number of Days", ""+days.size());
         if(result == "") {
             Toast.makeText(this, "Please select at least one day to repeat.", Toast.LENGTH_SHORT).show();
             Log.i("Set Button:", "In If");
@@ -54,13 +55,14 @@ public class Repeat extends AppCompatActivity implements CompoundButton.OnChecke
             Log.i("Set Button:", "Finishing activity.");
             Intent returnIntent = new Intent();
             returnIntent.putExtra("result", result);
+            returnIntent.putExtra("num", days.size());
             setResult(Activity.RESULT_OK, returnIntent);
             finish();
         }
     }
 
     private String getDaysString() {
-        String res =" ";
+        String res ="";
         for(int i=0;i<days.size();i++){
             res = res + days.get(i) + " ";
         }

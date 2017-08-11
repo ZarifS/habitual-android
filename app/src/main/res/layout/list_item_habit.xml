@@ -62,7 +62,8 @@
             android:layout_height="match_parent"
             android:layout_weight=".5"
             android:background="@color/blue"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="wrap_content"

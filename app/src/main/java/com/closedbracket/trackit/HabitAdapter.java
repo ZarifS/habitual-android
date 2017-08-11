@@ -1,12 +1,14 @@
 package com.closedbracket.trackit;
 
 import android.content.Context;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +37,7 @@ public class HabitAdapter extends BaseSwipeAdapter{
     public HabitAdapter(Context context, RealmResults<Habit> items) {
         mContext = context;
         mDataSource = items;
+        Realm.init(mContext);
         realm = Realm.getDefaultInstance();
     }
 
@@ -107,6 +110,8 @@ public class HabitAdapter extends BaseSwipeAdapter{
             holder.habitName= (TextView) convertView.findViewById(R.id.habitlist_name);
             holder.habitTracker = (Button) convertView.findViewById(R.id.habitlist_tracker);
             holder.habitChecked = (ImageButton) convertView.findViewById(R.id.habitlist_checked);
+            holder.completionView = (RelativeLayout) convertView.findViewById(R.id.completionView);
+            holder.completion = (TextView) convertView.findViewById(R.id.completion);
 
             // hang onto this holder for future recyclage
             convertView.setTag(holder);
@@ -119,7 +124,9 @@ public class HabitAdapter extends BaseSwipeAdapter{
         // Get relevant subviews of row view
         TextView habitName = holder.habitName;
         Button habitTracker = holder.habitTracker;
-        ImageButton habitChecked = holder.habitChecked;
+        final ImageButton habitChecked = holder.habitChecked;
+        RelativeLayout completionView = holder.completionView;
+        TextView habitCompletion = holder.completion;
 
 
         //Get corresponding habit for row
@@ -128,54 +135,92 @@ public class HabitAdapter extends BaseSwipeAdapter{
         // Update row view's textviews to display habit information
         habitName.setText(habit.getName());
 
-        //Set habit tracker to show either tracker/target or just target
-        if(habit.getTarget() != 0) {
-            String target = Integer.toString(habit.getTarget());
-            String tracker = Integer.toString(habit.getTracker());
-            habitTracker.setText(tracker+"/"+target);
-        }
-        else habitTracker.setText(Integer.toString(habit.getTracker()));
+        //TO-DO make the colors change based on levels
+//        if(habit.getCompletion()>0){
+//            completionView.setVisibility(View.VISIBLE);
+//        }
+//        else{
+//            completionView.setVisibility(View.INVISIBLE);
+//        }
 
+        //Set habit tracker to show either tracker/target or just target
+        String target = Integer.toString(habit.getTarget());
+        String tracker = Integer.toString(habit.getTracker());
+        String completionText = Integer.toString(habit.getCompletion());
+        habitTracker.setText(tracker+"/"+target);
+        habitCompletion.setText(completionText);
+
+        //if habit has been updated today, set color to green, else set to grey
+        realm.beginTransaction();
         if (isSameDay(position)){
             habitChecked.setBackgroundResource(R.drawable.green);
+            habit.setChange(1);
         }
-        else habitChecked.setBackgroundResource(R.drawable.grey); //if habit has been updated today, set color to green, else set to grey
+        else {
+            habitChecked.setBackgroundResource(R.drawable.grey);
+            habit.setChange(0);
+        }
+        realm.commitTransaction();
+
+        //Set habitChecked button listen and link to updateHabit
         habitChecked.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i("In on Click:", ""+position+"");
-                updateHabit(position);
+                updateHabit(position, habitChecked);
             }
         });
     }
 
-    private void updateHabit(int position){
-        Realm.init(mContext);
-        Realm realm = Realm.getDefaultInstance();
+    private void updateHabit(int position, ImageButton habitChecked){
+        Habit habit = mDataSource.get(position);
         realm.beginTransaction();
-//        mDataSource.get(position).setTracker(mDataSource.get(position).getTracker()+1);
-        if(!isSameDay(position)){ //If the habit hasn't already been updated today
-            mDataSource.get(position).setTracker(mDataSource.get(position).getTracker()+1);
-            mDataSource.get(position).setUpdated(new Date()); //update updated date
+        if(habit.getChange() == 0){ //If the habit hasn't already been updated today
+            habit.setTracker(habit.getTracker()+1);
+            habit.setLastUpdated(habit.getUpdated()); //set the last update to the updated time
+            //update completion if weekly target is hit.
+            if(checkCompletion(habit)){
+                habit.setCompletion(habit.getCompletion()+1);
+            }
+            habit.setUpdated(new Date()); //update updated date with current time
+            habit.setChange(1); //Set the habit to changed;
+        }
+        else{
+            //check if the target was hit, and decrement it.
+            if(checkCompletion(habit)){
+                habit.setCompletion(habit.getCompletion()-1);
+            }
+            habit.setTracker(habit.getTracker()-1);
+            habit.setUpdated(habit.getLastUpdated()); //set habit back to the last updated time.
+            habit.setChange(0); //Set the habit back to unchanged;
         }
         realm.commitTransaction();
     }
 
-    private boolean isSameDay(int position){
-        Date currentDate = new Date();
-        Date updatedDate = mDataSource.get(position).getUpdated();
-        // Strip out the time part of each date.
-        int MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
-        long julianDayNumber1 = currentDate.getTime() / MILLIS_PER_DAY;
-        long julianDayNumber2 = updatedDate.getTime() / MILLIS_PER_DAY;
+    private boolean checkCompletion(Habit habit) {
+        //check if habit hit the goal
+        return (habit.getTarget() == habit.getTracker());
+    }
 
-        // If they now are equal then it is the same day.
-        return julianDayNumber1 == julianDayNumber2;
+    private boolean isSameDay(int position){
+//        Date currentDate = new Date();
+        Date updatedDate = mDataSource.get(position).getUpdated();
+        //Checks if the item was updated today.
+        return DateUtils.isToday(updatedDate.getTime());
+        // Strip out the time part of each date.
+//        int MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
+//        long julianDayNumber1 = currentDate.getTime() / MILLIS_PER_DAY;
+//        long julianDayNumber2 = updatedDate.getTime() / MILLIS_PER_DAY;
+//
+//        // If they now are equal then it is the same day.
+//        return julianDayNumber1 == julianDayNumber2;
     }
 
     private static class ViewHolder {
         public TextView habitName;
         public ImageButton habitChecked;
         public Button habitTracker;
+        public RelativeLayout completionView;
+        public TextView completion;
     }
 }

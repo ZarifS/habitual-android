@@ -140,7 +140,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1.23"
-                    android:max="7" />
+                    android:max="6" />
 
                 <TextView
                     android:id="@+id/seekbar_text"
@@ -209,7 +209,6 @@
                         app:wheel_curtain_color="#28ffffff"
                         app:wheel_curved="true"
                         app:wheel_cyclic="true"
-                        app:wheel_data="@array/hours"
                         app:wheel_indicator="false"
                         app:wheel_item_align="center"
                         app:wheel_item_text_color="@color/colorAccent"
@@ -228,7 +227,6 @@
                         app:wheel_curtain_color="#28ffffff"
                         app:wheel_curved="true"
                         app:wheel_cyclic="true"
-                        app:wheel_data="@array/minutes"
                         app:wheel_indicator="false"
                         app:wheel_item_align="center"
                         app:wheel_item_text_color="@color/colorAccent"
@@ -246,7 +244,6 @@
                         app:wheel_curtain_color="#28ffffff"
                         app:wheel_curved="true"
                         app:wheel_cyclic="false"
-                        app:wheel_data="@array/time"
                         app:wheel_indicator="false"
                         app:wheel_item_align="center"
                         app:wheel_item_text_color="@color/colorAccent"

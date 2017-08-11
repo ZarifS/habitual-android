@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK) {
             Log.i("Return to Main Habit:","Got back data from AddHabit activity.");
         }
-        getHabits();
     }
 
     private void getHabits(){
