@@ -11,6 +11,7 @@ public class AlarmID extends RealmObject {
     @PrimaryKey
     private int id;
     private long time;
+    private long interval;
 
     public long getId() {
         return id;
@@ -26,5 +27,13 @@ public class AlarmID extends RealmObject {
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    public long getInterval() {
+        return interval;
+    }
+
+    public void setInterval(long interval) {
+        this.interval = interval;
     }
 }

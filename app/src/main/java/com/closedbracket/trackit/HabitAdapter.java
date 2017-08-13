@@ -1,6 +1,9 @@
 package com.closedbracket.trackit;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +22,7 @@ import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
 import java.util.Date;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -90,11 +94,24 @@ public class HabitAdapter extends BaseSwipeAdapter{
     private void deleteHabit(int position) {
         realm.beginTransaction();
         Habit habit = mDataSource.get(position);
+        removeReminders(habit);
         Log.i("DeleteHabit:", "Deleting " + habit.getName());
         habit.deleteFromRealm();
         Log.i("DeleteHabit:", "Deleted habit");
         realm.commitTransaction();
         Toast.makeText(mContext, "Habit Deleted.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void removeReminders(Habit habit) {
+        List<AlarmID> alarms = habit.getAlarmsList();
+        AlarmManager alarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
+        for(AlarmID alarm: alarms){
+            Number id = alarm.getId();
+            Intent alarmIntent = new Intent(mContext, AlarmReceiver.class);
+            PendingIntent pIntent = PendingIntent.getBroadcast(mContext, id.intValue(), alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT );
+            alarmManager.cancel(pIntent);
+            Log.i("removeReminders", "Successfully cancelled alarm:" +id);
+        }
     }
 
 
@@ -135,13 +152,7 @@ public class HabitAdapter extends BaseSwipeAdapter{
         // Update row view's textviews to display habit information
         habitName.setText(habit.getName());
 
-        //TO-DO make the colors change based on levels
-//        if(habit.getCompletion()>0){
-//            completionView.setVisibility(View.VISIBLE);
-//        }
-//        else{
-//            completionView.setVisibility(View.INVISIBLE);
-//        }
+        setColor(completionView, habit.getCompletion());
 
         //Set habit tracker to show either tracker/target or just target
         String target = Integer.toString(habit.getTarget());
@@ -172,6 +183,22 @@ public class HabitAdapter extends BaseSwipeAdapter{
         });
     }
 
+    private void setColor(RelativeLayout completionView, int val) {
+        if(val == 0){
+            completionView.setBackgroundColor(mContext.getResources().getColor(R.color.washed));
+        }
+        else if (val == 1){
+            completionView.setBackgroundColor(mContext.getResources().getColor(R.color.blue));
+        }
+        else if (val == 2){
+            completionView.setBackgroundColor(mContext.getResources().getColor(R.color.purple));
+        }
+        else if (val >= 3){
+            completionView.setBackgroundColor(mContext.getResources().getColor(R.color.gold));
+
+        }
+    }
+
     private void updateHabit(int position, ImageButton habitChecked){
         Habit habit = mDataSource.get(position);
         realm.beginTransaction();
@@ -181,6 +208,7 @@ public class HabitAdapter extends BaseSwipeAdapter{
             //update completion if weekly target is hit.
             if(checkCompletion(habit)){
                 habit.setCompletion(habit.getCompletion()+1);
+                habit.setWeeklyCompletion(true);
             }
             habit.setUpdated(new Date()); //update updated date with current time
             habit.setChange(1); //Set the habit to changed;
@@ -189,6 +217,7 @@ public class HabitAdapter extends BaseSwipeAdapter{
             //check if the target was hit, and decrement it.
             if(checkCompletion(habit)){
                 habit.setCompletion(habit.getCompletion()-1);
+                habit.setWeeklyCompletion(false);
             }
             habit.setTracker(habit.getTracker()-1);
             habit.setUpdated(habit.getLastUpdated()); //set habit back to the last updated time.

@@ -2,6 +2,7 @@ package com.closedbracket.trackit;
 
 import java.util.Date;
 
+import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -22,6 +23,8 @@ public class Habit extends RealmObject{
     private int tracker;
     private int change;
     private int completion;
+    private RealmList<AlarmID> alarmsList;
+    private boolean weeklyCompletion;
 
     //All of the getters and setters.
     public Date getUpdated() {
@@ -110,6 +113,22 @@ public class Habit extends RealmObject{
 
     public void setCompletion(int completion) {
         this.completion = completion;
+    }
+
+    public RealmList<AlarmID> getAlarmsList() {
+        return alarmsList;
+    }
+
+    public void setAlarmsList(RealmList<AlarmID> alarmsList) {
+        this.alarmsList = alarmsList;
+    }
+
+    public boolean isWeeklyCompletion() {
+        return weeklyCompletion;
+    }
+
+    public void setWeeklyCompletion(boolean weeklyCompletion) {
+        this.weeklyCompletion = weeklyCompletion;
     }
 
     //To string override to see habit info.

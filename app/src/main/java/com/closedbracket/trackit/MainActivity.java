@@ -1,6 +1,8 @@
 package com.closedbracket.trackit;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,6 +29,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setDefaultHabitReminder();
+    }
+
+    private void setDefaultHabitReminder() {
+        Intent alarmIntent = new Intent(this, AlarmReceiver.class);
+        alarmIntent.putExtra("id", 0);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+        Calendar cal = Calendar.getInstance();
+        //set a reminder every day at 9.
+        cal.set(Calendar.HOUR,9);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.AM_PM,Calendar.PM);
+
+        AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+
+        Log.i("setDefaultHabitReminder", "Reminder set.");
     }
 
     @Override
@@ -116,6 +136,13 @@ public class MainActivity extends AppCompatActivity {
                     public void execute(Realm realm) {
                         for (Habit habit : habitsResults) {
                             habit.setTracker(0);
+                            if(habit.isWeeklyCompletion()){
+                                Log.i("Completion", ""+habit.getName()+" was completed last week.");
+                                habit.setWeeklyCompletion(false);
+                            }
+                            else {
+                                habit.setCompletion(0);
+                            }
                         }
                     }
                 });

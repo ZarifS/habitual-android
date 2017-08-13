@@ -20,6 +20,11 @@ public class AlarmReceiver extends BroadcastReceiver {
         int req = intent.getIntExtra("id",0);
         String title = name + " Reminder!";
         String message = "Your reminder to keep up your habit!";
+        if(req == 0){
+            Log.i("AlarmOnReceive", "Daily Review alarm");
+            title = "Daily Habit Review";
+            message = "Lets take a moment to review your habits for today.";
+        }
         long when = System.currentTimeMillis();
         Log.i("Triggered at:", ""+when);
         Log.i("Id of habit reminder:", ""+req);

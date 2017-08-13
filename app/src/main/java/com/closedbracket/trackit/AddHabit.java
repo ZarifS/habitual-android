@@ -42,6 +42,7 @@ public class AddHabit extends AppCompatActivity {
     private WheelPicker timeMin;
     private WheelPicker timePeriod;
     private Realm realm;
+    private Habit habit;
 
 
     @Override
@@ -142,7 +143,7 @@ public class AddHabit extends AppCompatActivity {
             nextId = currentIdNum.intValue() + 1;
         }
         //Create the habit realm object
-        Habit habit = realm.createObject(Habit.class, nextId);
+        habit = realm.createObject(Habit.class, nextId);
 
         //Setup the habit date times
         habit.setCreated(new Date());
@@ -169,7 +170,7 @@ public class AddHabit extends AppCompatActivity {
         Log.i("Creating New Habit", "Added habit finished");
     }
 
-    private void createNotifications(long time) {
+    private void createNotifications(long time, long interval) {
         Log.i("Reminder at",""+habitReminder.getHours()+":"+habitReminder.getMinutes());
         int id;
         //Create the new alarm id object
@@ -183,6 +184,8 @@ public class AddHabit extends AppCompatActivity {
         //Create the habit realm object
         AlarmID alarmID = realm.createObject(AlarmID.class, id);
         alarmID.setTime(time);
+        alarmID.setInterval(interval);
+        habit.getAlarmsList().add(alarmID);
 
         //Create the alarms/notifications for the user
         Intent alarmIntent = new Intent(this, AlarmReceiver.class);
@@ -192,25 +195,22 @@ public class AddHabit extends AppCompatActivity {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, id, alarmIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time, 24 * 7 * 60 * 60 * 1000 , pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, time, interval, pendingIntent);
 
         Log.i("createNotifications", "Alarm manager is created.");
-
 
     }
 
     private void addReminder(){
         //Set the calendar times.
-
-        Calendar calendar = Calendar.getInstance();
         Calendar now = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, habitReminder.getHours());
-        calendar.set(Calendar.MINUTE, habitReminder.getMinutes());
         long time;
+        long interval;
 
         //If not repeating daily, set it based on the day
 
         if(!repeatDays.equals("Daily")){
+            Log.i("addReminder", "Days selected");
 
             String[] days = repeatDays.split(" ");
 
@@ -219,21 +219,32 @@ public class AddHabit extends AppCompatActivity {
             for (String day:days){
                 int dayOfWeek = getRepeatDay(day);
                 Log.i("DayOfWeek", ""+dayOfWeek);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+                calendar.set(Calendar.HOUR_OF_DAY, habitReminder.getHours());
+                calendar.set(Calendar.MINUTE, habitReminder.getMinutes());
                 calendar.set(Calendar.DAY_OF_WEEK, dayOfWeek);
                 if(calendar.before(now)){
-                    calendar.add(Calendar.DATE, 1);
+                    calendar.add(Calendar.DATE, 7);
                 }
                 time = calendar.getTimeInMillis();
-                createNotifications(time);
+                interval = 7*24*60*60*1000;
+                createNotifications(time, interval);
             }
         }
         //if its daily
         else {
+            Log.i("addReminder", "Daily selected");
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(System.currentTimeMillis());
+            calendar.set(Calendar.HOUR_OF_DAY, habitReminder.getHours());
+            calendar.set(Calendar.MINUTE, habitReminder.getMinutes());
             if(calendar.before(now)){
                 calendar.add(Calendar.DATE, 1);
             }
             time = calendar.getTimeInMillis();
-            createNotifications(time);
+            interval = 24*60*60*1000;
+            createNotifications(time,interval);
         }
     }
 
