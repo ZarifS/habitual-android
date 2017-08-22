@@ -1,4 +1,4 @@
-package com.closedbracket.trackit;
+package com.accentsoftware.habitual;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

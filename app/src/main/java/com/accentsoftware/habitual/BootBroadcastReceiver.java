@@ -1,4 +1,4 @@
-package com.closedbracket.trackit;
+package com.accentsoftware.habitual;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;

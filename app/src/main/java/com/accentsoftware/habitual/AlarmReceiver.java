@@ -1,4 +1,4 @@
-package com.closedbracket.trackit;
+package com.accentsoftware.habitual;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -37,7 +37,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setShowWhen(true)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.ic_action_name)
                 .setAutoCancel(true)
                 .build();
         nM.notify(req,notification);

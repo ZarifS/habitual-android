@@ -1,9 +1,10 @@
-package com.closedbracket.trackit;
+package com.accentsoftware.habitual;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,12 +38,14 @@ public class HabitAdapter extends BaseSwipeAdapter{
     private RealmResults<Habit> mDataSource;
     private Realm realm;
     private SwipeLayout swipeLayout;
+    private MediaPlayer mp;
 
     public HabitAdapter(Context context, RealmResults<Habit> items) {
         mContext = context;
         mDataSource = items;
         Realm.init(mContext);
         realm = Realm.getDefaultInstance();
+        mp = MediaPlayer.create(mContext, R.raw.click);
     }
 
     @Override
@@ -204,11 +207,13 @@ public class HabitAdapter extends BaseSwipeAdapter{
         realm.beginTransaction();
         if(habit.getChange() == 0){ //If the habit hasn't already been updated today
             habit.setTracker(habit.getTracker()+1);
+            mp.start();
             habit.setLastUpdated(habit.getUpdated()); //set the last update to the updated time
             //update completion if weekly target is hit.
             if(checkCompletion(habit)){
                 habit.setCompletion(habit.getCompletion()+1);
                 habit.setWeeklyCompletion(true);
+
             }
             habit.setUpdated(new Date()); //update updated date with current time
             habit.setChange(1); //Set the habit to changed;

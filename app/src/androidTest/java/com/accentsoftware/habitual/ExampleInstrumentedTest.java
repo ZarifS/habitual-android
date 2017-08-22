@@ -1,4 +1,4 @@
-package com.closedbracket.trackit;
+package com.accentsoftware.habitual;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
