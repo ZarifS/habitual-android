@@ -9,22 +9,22 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.accentsoftware.habitual.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.accentsoftware.habitual.AddHabit"
+            android:name=".AddHabit"
             android:parentActivityName="com.accentsoftware.habitual.MainActivity">
         </activity>
         <activity android:name="com.accentsoftware.habitual.Repeat">
         </activity>
+        <activity android:name="com.accentsoftware.habitual.Settings">
+        </activity>
         <receiver android:name="com.accentsoftware.habitual.AlarmReceiver" android:enabled="true"
             android:exported="true">
-
         </receiver>
         <receiver
             android:name="com.accentsoftware.habitual.BootBroadcastReceiver"

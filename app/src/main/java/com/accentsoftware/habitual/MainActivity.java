@@ -148,4 +148,10 @@ public class MainActivity extends AppCompatActivity {
                 });
         }
     }
+
+    public void settingsClick(View view){
+        Log.i("Settings Clicked","Bringing to next Page");
+        Intent intent = new Intent(this, Settings.class);
+        startActivity(intent);
+    }
 }
