@@ -85,12 +85,6 @@ public class HabitAdapter extends BaseSwipeAdapter{
                 deleteHabit(position);
             }
         });
-        v.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i("Edit Button", "Clicked");
-            }
-        });
         return v;
     }
 
@@ -237,17 +231,9 @@ public class HabitAdapter extends BaseSwipeAdapter{
     }
 
     private boolean isSameDay(int position){
-//        Date currentDate = new Date();
         Date updatedDate = mDataSource.get(position).getUpdated();
         //Checks if the item was updated today.
         return DateUtils.isToday(updatedDate.getTime());
-        // Strip out the time part of each date.
-//        int MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
-//        long julianDayNumber1 = currentDate.getTime() / MILLIS_PER_DAY;
-//        long julianDayNumber2 = updatedDate.getTime() / MILLIS_PER_DAY;
-//
-//        // If they now are equal then it is the same day.
-//        return julianDayNumber1 == julianDayNumber2;
     }
 
     private static class ViewHolder {

@@ -12,6 +12,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import java.util.Calendar;
 
 import io.realm.Realm;
@@ -22,14 +26,16 @@ public class MainActivity extends AppCompatActivity {
 
     private RealmResults<Habit> habitsResults;
     private Realm realm;
-    private ListView mListView;
     HabitAdapter adapter;
+    private AdView mAdView;
+    private AdRequest adRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        setDefaultHabitReminder();
+            setContentView(R.layout.activity_main);
+            setDefaultHabitReminder();
+            initAds();
     }
 
     private void setDefaultHabitReminder() {
@@ -49,12 +55,20 @@ public class MainActivity extends AppCompatActivity {
         Log.i("setDefaultHabitReminder", "Reminder set.");
     }
 
+    private void initAds (){
+        MobileAds.initialize(this, "ca-app-pub-7441997739901543~3178356327");
+        mAdView = (AdView) findViewById(R.id.adView);
+        adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+
     @Override
     protected void onStart(){
         super.onStart();
         Realm.init(this);
-//        RealmConfiguration configuration = new RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build();
-//        Realm.deleteRealm(configuration); //For flushing Realm DB
+        if(mAdView != null) {
+            mAdView.loadAd(adRequest);
+        }
         realm = Realm.getDefaultInstance();
         getHabits();
         resetTracker();
@@ -70,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initListView() {
         adapter = new HabitAdapter(this,habitsResults);
-        mListView = (ListView) findViewById(R.id.habits_list);
+        ListView mListView = (ListView) findViewById(R.id.habits_list);
         mListView.setAdapter(adapter);
     }
 
@@ -124,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
     private void resetTracker(){
         Calendar cal = Calendar.getInstance();
         int currentWeekOfYear = cal.get(Calendar.WEEK_OF_YEAR);
-        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
         int weekOfYear = sharedPreferences.getInt("weekOfYear", 0);
 
         if(weekOfYear != currentWeekOfYear){ //different week

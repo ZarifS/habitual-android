@@ -13,7 +13,7 @@
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:tag="Bottom3"
-        android:weightSum="2">
+        android:weightSum="1">
 
         <ImageButton
             android:id="@+id/delete"
@@ -23,15 +23,6 @@
             android:background="@android:color/transparent"
             android:padding="5dp"
             swipe:srcCompat="@drawable/delete" />
-
-        <ImageButton
-            android:id="@+id/edit"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:padding="5dp"
-            swipe:srcCompat="@drawable/edit" />
 
     </LinearLayout>
 

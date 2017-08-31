@@ -134,7 +134,6 @@ public class Habit extends RealmObject{
     //To string override to see habit info.
     @Override
     public String toString() {
-        String temp = "Habit Name:" + getName() + ", Repeating: " + getRepeat() + ", Target: " + getTarget() + ", On track for: " + getTracker();
-        return temp;
+        return "Habit Name:" + getName() + ", Repeating: " + getRepeat() + ", Target: " + getTarget() + ", On track for: " + getTracker();
     }
 }

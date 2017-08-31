@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.accentsoftware.habitual">
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,24 +12,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".AddHabit"
-            android:parentActivityName="com.accentsoftware.habitual.MainActivity">
-        </activity>
-        <activity android:name="com.accentsoftware.habitual.Repeat">
-        </activity>
-        <activity android:name="com.accentsoftware.habitual.Settings">
-        </activity>
-        <receiver android:name="com.accentsoftware.habitual.AlarmReceiver" android:enabled="true"
-            android:exported="true">
-        </receiver>
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".Repeat" />
+        <activity android:name=".Settings" />
+
         <receiver
-            android:name="com.accentsoftware.habitual.BootBroadcastReceiver"
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".BootBroadcastReceiver"
             android:enabled="true"
             android:exported="false"
             android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
@@ -36,5 +33,16 @@
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".Help" />
+        <activity android:name=".About" />
+        <activity android:name=".Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
+
 </manifest>
