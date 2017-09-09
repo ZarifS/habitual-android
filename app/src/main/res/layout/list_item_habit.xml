@@ -16,15 +16,6 @@
         android:weightSum="2">
 
         <ImageButton
-            android:id="@+id/delete"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:padding="5dp"
-            swipe:srcCompat="@drawable/delete" />
-
-        <ImageButton
             android:id="@+id/edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -32,6 +23,15 @@
             android:background="@android:color/transparent"
             android:padding="5dp"
             swipe:srcCompat="@drawable/edit" />
+
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:padding="5dp"
+            swipe:srcCompat="@drawable/delete" />
 
     </LinearLayout>
 
@@ -52,6 +52,8 @@
             android:layout_weight="2.5"
             android:padding="10dp"
             android:text="habit"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"
             android:textSize="18sp" />
@@ -61,8 +63,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:background="@color/blue"
-            android:gravity="center">
+            android:background="@color/washed"
+            android:gravity="center"
+            android:visibility="visible">
 
             <LinearLayout
                 android:layout_width="wrap_content"

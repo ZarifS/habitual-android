@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "446767179773",
+    "firebase_url": "https://habitual-45be3.firebaseio.com",
+    "project_id": "habitual-45be3",
+    "storage_bucket": "habitual-45be3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446767179773:android:c6b1ff7a4708b847",
+        "android_client_info": {
+          "package_name": "com.accentsoftware.habitual"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446767179773-9o7uk6lkf62p8befurg726bhru093gnu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.accentsoftware.habitual",
+            "certificate_hash": "dbd8b1299948fc192160964ec2c7213c72cb67ef"
+          }
+        },
+        {
+          "client_id": "446767179773-899bigbdsdbsdl0kdm7nmnm5mlcs31b9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSVpp5Nh0n007DZ0JXkQ93CrW1iVrf71c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446767179773-899bigbdsdbsdl0kdm7nmnm5mlcs31b9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

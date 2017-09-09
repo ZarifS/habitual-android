@@ -5,7 +5,7 @@
     android:id="@+id/activity_add_habit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.closedbracket.trackit.AddHabit">
+    tools:context="com.accentsoftware.habitual.AddHabit">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,22 +24,26 @@
                 android:id="@+id/titleBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/border2"
                     android:fontFamily="sans-serif-condensed"
-                    android:padding="5dp"
                     android:text="REPEAT"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/colorAccent"
                     android:textSize="30sp" />
+
+                <View
+                    android:id="@+id/view5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorAccent" />
             </LinearLayout>
 
             <LinearLayout
@@ -254,7 +258,7 @@
             android:background="@drawable/buttonbg"
             android:onClick="setButton"
             android:text="Set"
-            android:textColor="@color/colorAccentLight" />
+            android:textColor="@color/colorAccent" />
     </RelativeLayout>
 
 </RelativeLayout>
