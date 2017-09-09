@@ -11,10 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+
+import org.honorato.multistatetogglebutton.MultiStateToggleButton;
+import org.honorato.multistatetogglebutton.ToggleButton;
 
 import java.util.Calendar;
 
@@ -29,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
     HabitAdapter adapter;
     private AdView mAdView;
     private AdRequest adRequest;
+    private MultiStateToggleButton filterType;
+    private TextView indicate;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,22 +78,44 @@ public class MainActivity extends AppCompatActivity {
             mAdView.loadAd(adRequest);
         }
         realm = Realm.getDefaultInstance();
-        getHabits();
+        indicate = (TextView) findViewById(R.id.indicate);
+        initFilter();
+        getHabits(filterType.getValue());
         resetTracker();
         initListView();
-        RealmChangeListener changeListener = new RealmChangeListener() {
+    }
+
+    private void initFilter() {
+        filterType = (MultiStateToggleButton) findViewById(R.id.filter);
+        final SharedPreferences pref = getPreferences(MODE_PRIVATE);
+        int val = pref.getInt("filter", 1);
+        filterType.setValue(val); //Set default button to assignment.
+        filterType.setOnValueChangedListener(new ToggleButton.OnValueChangedListener() {
             @Override
-            public void onChange(Object element) {
-                adapter.notifyDataSetChanged();
+            public void onValueChanged(int value) {
+                Log.i("onChanged", "Value changed!");
+                SharedPreferences.Editor edit = pref.edit();
+                edit.putInt("filter", value);
+                edit.apply();
+                getHabits(value);
+                habitsResults.removeAllChangeListeners();
+                initListView();
             }
-        };
-        habitsResults.addChangeListener(changeListener);
+        });
     }
 
     private void initListView() {
         adapter = new HabitAdapter(this,habitsResults);
         ListView mListView = (ListView) findViewById(R.id.habits_list);
         mListView.setAdapter(adapter);
+        RealmChangeListener changeListener = new RealmChangeListener() {
+            @Override
+            public void onChange(Object element) {
+                Log.i("onChanged Listener", "Habit List changed!");
+                adapter.notifyDataSetChanged();
+            }
+        };
+        habitsResults.addChangeListener(changeListener);
     }
 
     public void addHabit(View view){
@@ -102,8 +132,30 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void getHabits(){
-        habitsResults = realm.where(Habit.class).findAllSorted("name");
+    private void getHabits(int val){
+        if(val==0){
+            Log.i("Get Habits", "Getting habits for Today");
+            Calendar calendar = Calendar.getInstance();
+            int day = calendar.get(Calendar.DAY_OF_WEEK);
+            String today = dayToString(day);
+            habitsResults = realm.where(Habit.class).contains("repeat", today).or().contains("repeat", "Daily").findAllSorted("name");
+            if (habitsResults.size() == 0){
+                indicate.setVisibility(View.VISIBLE);
+            }
+            else{
+                indicate.setVisibility(View.GONE);
+            }
+        }
+        else {
+            Log.i("Get Habits", "Getting habits for All");
+            habitsResults = realm.where(Habit.class).findAllSorted("name");
+            if (habitsResults.size() == 0){
+                indicate.setVisibility(View.VISIBLE);
+            }
+            else{
+                indicate.setVisibility(View.GONE);
+            }
+        }
         Log.i("Get Habits", "Got all habits");
     }
 
