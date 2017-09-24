@@ -282,9 +282,7 @@ public class AddHabit extends AppCompatActivity {
 
         if (mySwitch.isChecked()){
             int h = timeHour.getCurrentItemPosition();
-            System.out.println(h);
             h = hours.get(h);
-            System.out.println(h);
             int m = timeMin.getCurrentItemPosition();
             m = minutes.get(m);
             int p = timePeriod.getCurrentItemPosition();

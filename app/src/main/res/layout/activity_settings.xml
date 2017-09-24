@@ -32,6 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:background="@drawable/border"
         android:orientation="horizontal"
         android:padding="5dp"
         android:weightSum="2">
@@ -60,6 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:background="@drawable/border"
         android:clickable="true"
         android:onClick="helpClick"
         android:orientation="horizontal"

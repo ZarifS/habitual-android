@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
 
 import org.honorato.multistatetogglebutton.MultiStateToggleButton;
 import org.honorato.multistatetogglebutton.ToggleButton;
@@ -36,14 +35,44 @@ public class MainActivity extends AppCompatActivity {
     private MultiStateToggleButton filterType;
     private TextView indicate;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-            setDefaultHabitReminder();
-            initAds();
+        setContentView(R.layout.activity_main);
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder()
+            .addTestDevice("745550807238A6B8EF5232342F3B9DFD")
+            .build();
+        // Start loading the ad in the background.
+        mAdView.loadAd(adRequest);
+        setDefaultHabitReminder();
+    }
+
+    /** Called when leaving the activity */
+    @Override
+    public void onPause() {
+        if (mAdView != null) {
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    /** Called when returning to the activity */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdView != null) {
+            mAdView.resume();
+        }
+    }
+
+    /** Called before the activity is destroyed */
+    @Override
+    public void onDestroy() {
+        if (mAdView != null) {
+            mAdView.destroy();
+        }
+        super.onDestroy();
     }
 
     private void setDefaultHabitReminder() {
@@ -63,20 +92,10 @@ public class MainActivity extends AppCompatActivity {
         Log.i("setDefaultHabitReminder", "Reminder set.");
     }
 
-    private void initAds (){
-        MobileAds.initialize(this, "ca-app-pub-7441997739901543~3178356327");
-        mAdView = (AdView) findViewById(R.id.adView);
-        adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
-
     @Override
     protected void onStart(){
         super.onStart();
         Realm.init(this);
-        if(mAdView != null) {
-            mAdView.loadAd(adRequest);
-        }
         realm = Realm.getDefaultInstance();
         indicate = (TextView) findViewById(R.id.indicate);
         initFilter();

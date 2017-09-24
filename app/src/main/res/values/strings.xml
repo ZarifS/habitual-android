@@ -2,4 +2,7 @@
     <string name="app_name">Habitual</string>
     <string name="title_activity_help">help</string>
     <string name="ad_id">ca-app-pub-7441997739901543~3178356327</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-7441997739901543/7216484318</string>
+
 </resources>
