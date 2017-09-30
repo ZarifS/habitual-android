@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private Realm realm;
     HabitAdapter adapter;
     private AdView mAdView;
-    private AdRequest adRequest;
     private MultiStateToggleButton filterType;
     private TextView indicate;
 
@@ -41,28 +40,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
-            .addTestDevice("745550807238A6B8EF5232342F3B9DFD")
+//            .addTestDevice("745550807238A6B8EF5232342F3B9DFD")
             .build();
         // Start loading the ad in the background.
         mAdView.loadAd(adRequest);
         setDefaultHabitReminder();
     }
 
-    /** Called when leaving the activity */
-    @Override
-    public void onPause() {
-        if (mAdView != null) {
-            mAdView.pause();
-        }
-        super.onPause();
-    }
 
     /** Called when returning to the activity */
     @Override
     public void onResume() {
         super.onResume();
+        AdRequest adRequest = new AdRequest.Builder().build();
         if (mAdView != null) {
-            mAdView.resume();
+            mAdView.loadAd(adRequest);
         }
     }
 
