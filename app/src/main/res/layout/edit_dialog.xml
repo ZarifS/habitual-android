@@ -35,12 +35,12 @@
             android:layout_height="wrap_content"
             android:layout_weight=".6"
             android:ems="7"
+            android:fontFamily="sans-serif-condensed"
             android:text="Name:"
             android:textAlignment="viewStart"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="22sp" />
 
         <EditText
             android:id="@+id/HabitNameInput"
@@ -61,7 +61,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/gradient1"
         android:orientation="horizontal"
-        android:padding="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:weightSum="2">
@@ -72,11 +71,11 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.4"
             android:ems="7"
+            android:fontFamily="sans-serif-condensed"
             android:text="Weekly Target:"
             android:textAllCaps="true"
             android:textColor="@color/colorAccent"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="22sp" />
 
         <EditText
             android:id="@+id/HabitWeeklyInput"

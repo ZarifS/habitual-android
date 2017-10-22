@@ -5,14 +5,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.support.v7.app.AlertDialog;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,7 +39,6 @@ public class HabitAdapter extends BaseSwipeAdapter{
     private Realm realm;
     private SwipeLayout swipeLayout;
     private MediaPlayer mp;
-    private AlertDialog dialog;
 
     public HabitAdapter(Context context, RealmResults<Habit> items) {
         mContext = context;
@@ -88,52 +85,11 @@ public class HabitAdapter extends BaseSwipeAdapter{
                 deleteHabit(position);
             }
         });
-        v.findViewById(R.id.edit).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                closeAllItems();
-                callEditDialog(position);
-            }
-        });
         return v;
     }
 
-    private void callEditDialog(final int position) {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(mContext);
-        View view = LayoutInflater.from(mContext).inflate(R.layout.edit_dialog, null);
-        final EditText name = (EditText) view.findViewById(R.id.HabitNameInput);
-        final EditText target = (EditText) view.findViewById(R.id.HabitWeeklyInput);
-        Habit habit = mDataSource.get(position);
-        name.setText(habit.getName());
-        target.setText(Integer.toString(habit.getTarget()));
-        Button okBtn = (Button) view.findViewById(R.id.done);
-        okBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editHabit(position, name.getText().toString(), target.getText().toString());
-            }
-        });
-        alertBuilder.setView(view);
-        dialog = alertBuilder.create();
-        dialog.show();
-    }
-
-    private void editHabit(int position, String name, String target) {
-        if(name.isEmpty() || target.isEmpty()){
-            Toast.makeText(mContext, "Please enter all the fields.", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            realm.beginTransaction();
-            Habit habit = mDataSource.get(position);
-            habit.setName(name);
-            habit.setTarget(Integer.parseInt(target));
-            realm.commitTransaction();
-            dialog.dismiss();
-            Toast.makeText(mContext, "Habit Updated!", Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private void deleteHabit(int position) {
+        //To-DO: Create a delete alert.
         realm.beginTransaction();
         Habit habit = mDataSource.get(position);
         removeReminders(habit);
@@ -154,6 +110,9 @@ public class HabitAdapter extends BaseSwipeAdapter{
             alarmManager.cancel(pIntent);
             Log.i("removeReminders", "Successfully cancelled alarm:" +id);
         }
+        realm.beginTransaction();
+        habit.getAlarmsList().deleteAllFromRealm();
+        realm.commitTransaction();
     }
 
 
@@ -171,6 +130,7 @@ public class HabitAdapter extends BaseSwipeAdapter{
             holder.habitChecked = (ImageButton) convertView.findViewById(R.id.habitlist_checked);
             holder.completionView = (RelativeLayout) convertView.findViewById(R.id.completionView);
             holder.completion = (TextView) convertView.findViewById(R.id.completion);
+            holder.habitClicker = (RelativeLayout) convertView.findViewById(R.id.habit_clicker);
 
             // hang onto this holder for future recyclage
             convertView.setTag(holder);
@@ -186,6 +146,7 @@ public class HabitAdapter extends BaseSwipeAdapter{
         final ImageButton habitChecked = holder.habitChecked;
         RelativeLayout completionView = holder.completionView;
         TextView habitCompletion = holder.completion;
+        RelativeLayout habitClicker = holder.habitClicker;
 
 
         //Get corresponding habit for row
@@ -223,6 +184,20 @@ public class HabitAdapter extends BaseSwipeAdapter{
                 updateHabit(position, habitChecked);
             }
         });
+
+        habitClicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("In on Click:", ""+position+"");
+                openHabitView(mDataSource.get(position).getId());
+            }
+        });
+    }
+
+    private void openHabitView(long id) {
+        Intent i = new Intent(mContext, HabitView.class);
+        i.putExtra("ID", id);
+        mContext.startActivity(i);
     }
 
     private void setColor(RelativeLayout completionView, int val) {
@@ -286,6 +261,7 @@ public class HabitAdapter extends BaseSwipeAdapter{
         public ImageButton habitChecked;
         public Button habitTracker;
         public RelativeLayout completionView;
+        public RelativeLayout habitClicker;
         public TextView completion;
     }
 }

@@ -145,7 +145,7 @@
                 android:text="The badge is the number of weeks in a row you've completed the habit. Yellow is your weekly progress."
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 
