@@ -96,4 +96,9 @@ public class Settings extends AppCompatActivity {
         Intent intent = new Intent(this, About.class);
         startActivity(intent);    }
 
+    public void feedbackClick(View view){
+        Intent intent = new Intent(this, Feedback.class);
+        startActivity(intent);
+    }
+
 }
