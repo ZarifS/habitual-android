@@ -21,14 +21,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/new_habit"
+                android:id="@+id/habit_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="sans-serif-condensed"
                 android:padding="5dp"
-                android:text="Habit Details"
+                android:text="Edit Habit"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
