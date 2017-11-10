@@ -97,6 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:background="@drawable/border"
         android:clickable="true"
         android:onClick="aboutClick"
         android:orientation="horizontal"
@@ -122,6 +123,41 @@
             android:layout_weight=".45"
             android:background="@android:color/transparent"
             android:onClick="aboutClick"
+            android:scaleType="fitEnd"
+            app:srcCompat="@drawable/arrow" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/feedbackSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:onClick="feedbackClick"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/feedbackTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:paddingLeft="10dp"
+            android:text="Feedback"
+            android:textAlignment="textStart"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/arrowFeedback"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".45"
+            android:background="@android:color/transparent"
+            android:onClick="feedbackClick"
             android:scaleType="fitEnd"
             app:srcCompat="@drawable/arrow" />
 

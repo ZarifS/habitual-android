@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
         RealmChangeListener changeListener = new RealmChangeListener() {
             @Override
             public void onChange(Object element) {
-                Log.i("onChanged Listener", "Habit List changed!");
                 adapter.notifyDataSetChanged();
             }
         };

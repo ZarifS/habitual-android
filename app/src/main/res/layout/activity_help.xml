@@ -62,7 +62,7 @@
                 android:text="Adding a habit"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -94,7 +94,7 @@
                 android:text="Creating a Habit"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/textView6"
@@ -105,7 +105,7 @@
                 android:text='To change repeat days, click the "Daily" to add specific days. Weekly target indicates how many times per week a habit needs to be completed to count towards your progress tracker. You can enable reminders (not exact) during your repeat days. Click add to confirm the new habit.'
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -137,7 +137,7 @@
                 android:text="Habit Items"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -161,7 +161,7 @@
                 android:text="The badge square holds the number of consecutive weeks you've completed your habit. Its your progress towards making this habit a part of your life. It resets if there goes any week without hitting your habit target for that week. \nThe yellow square holds your current weekly completion and your weekly target. \nThe checkmark box allows you to check off a habit daily, or uncheck it. "
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 

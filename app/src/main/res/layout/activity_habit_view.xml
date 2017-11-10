@@ -2,18 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_habit"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.accentsoftware.habitual.AddHabit">
+    tools:context="com.accentsoftware.habitual.HabitView">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:background="@drawable/gradient1"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:id="@+id/header"
@@ -22,14 +21,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/new_habit"
+                android:id="@+id/habit_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:fontFamily="sans-serif-condensed"
                 android:padding="5dp"
-                android:text="New Habit"
+                android:text="Edit Habit"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
@@ -56,75 +55,99 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingRight="5dp"
+                android:weightSum="2">
 
                 <TextView
                     android:id="@+id/name_header"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.79"
+                    android:layout_weight=".8"
                     android:fontFamily="sans-serif-condensed"
                     android:text="NAME"
-                    android:textAlignment="viewStart"
                     android:textColor="@color/colorAccent"
                     android:textSize="22sp" />
 
                 <EditText
                     android:id="@+id/habitName"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.54"
+                    android:layout_weight="1.2"
                     android:allowUndo="true"
                     android:autoText="true"
-                    android:ems="10"
+                    android:fontFamily="sans-serif-condensed"
                     android:hint="Read, Exercise .."
                     android:inputType="textPersonName"
+                    android:textAlignment="viewStart"
                     android:textAllCaps="false"
                     android:textColor="@color/colorAccent"
                     android:textColorHint="@color/text_hint"
                     android:textColorLink="@android:color/background_light"
-                    android:textSize="20sp" />
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/Repeat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/repeat_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".8"
+                    android:clickable="true"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="REPEATS"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="22sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.2"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:id="@+id/repeat_days"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.7"
+                        android:clickable="true"
+                        android:fontFamily="sans-serif-condensed"
+                        android:onClick="repeatClick"
+                        android:text="M, T, W, Th, F"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/text_hint"
+                        android:textSize="22sp" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".3"
+                        android:background="@android:color/transparent"
+                        android:onClick="repeatClick"
+                        android:scaleType="fitEnd"
+                        app:srcCompat="@drawable/arrow" />
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:onClick="repeatClick"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp">
-
-                <TextView
-                    android:id="@+id/repeat_header"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.41"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="Repeats"
-                    android:textAlignment="viewStart"
-                    android:textAllCaps="true"
-                    android:textColor="@color/colorAccent"
-                    android:textSize="22sp" />
-
-                <TextView
-                    android:id="@+id/repeat_holder"
-                    android:layout_width="230dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.40"
-                    android:clickable="true"
-                    android:ems="10"
-                    android:inputType="none|textPersonName"
-                    android:onClick="repeatClick"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/text_hint"
-                    android:textSize="20sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
@@ -159,6 +182,7 @@
                         android:id="@+id/seekbar_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:paddingRight="10dp"
                         android:text="7"
                         android:textColor="@color/colorAccent"
                         android:textSize="22sp" />
@@ -168,7 +192,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingBottom="10dp"
@@ -206,7 +230,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/reminders_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-condensed"
@@ -220,9 +244,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:visibility="gone">
 
                 <LinearLayout
+                    android:id="@+id/time_wheel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -302,10 +328,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
                 android:background="@drawable/buttonbg"
-                android:onClick="add"
-                android:text="Add"
-                android:textColor="@color/colorAccent" />
+                android:onClick="updateButtonClick"
+                android:text="Update"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
         </LinearLayout>
 
     </RelativeLayout>
+
 </RelativeLayout>
