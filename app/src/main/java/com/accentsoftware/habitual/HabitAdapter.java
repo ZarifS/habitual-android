@@ -110,9 +110,7 @@ public class HabitAdapter extends BaseSwipeAdapter{
             alarmManager.cancel(pIntent);
             Log.i("removeReminders", "Successfully cancelled alarm:" +id);
         }
-        realm.beginTransaction();
         habit.getAlarmsList().deleteAllFromRealm();
-        realm.commitTransaction();
     }
 
 
