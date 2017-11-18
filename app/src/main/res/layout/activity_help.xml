@@ -158,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:fontFamily="sans-serif-condensed"
-                android:text="The badge square holds the number of consecutive weeks you've completed your habit. Its your progress towards making this habit a part of your life. It resets if there goes any week without hitting your habit target for that week. \nThe yellow square holds your current weekly completion and your weekly target. \nThe checkmark box allows you to check off a habit daily, or uncheck it. "
+                android:text="The badge square holds the number of consecutive weeks you've completed your habit. Its your progress towards making this habit a part of your life. It resets if there goes any week without hitting your habit target for that week. The yellow square holds your current weekly completion and your weekly target. The checkmark box allows you to check off a habit daily, or uncheck it. "
                 android:textAlignment="viewStart"
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp" />

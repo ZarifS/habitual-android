@@ -38,13 +38,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // No ads enabled.
+        //initAds();
+        setDefaultHabitReminder();
+    }
+
+    //Used to initialize ads
+    private void initAds(){
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder()
 //            .addTestDevice("745550807238A6B8EF5232342F3B9DFD")
-            .build();
+                .build();
         // Start loading the ad in the background.
         mAdView.loadAd(adRequest);
-        setDefaultHabitReminder();
     }
 
 
