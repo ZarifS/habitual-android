@@ -45,7 +45,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:fontFamily="sans-serif-condensed"
-            android:gravity="center"
             android:text="We're always trying to improve the quality of our application, we know its far from perfect and thats why your feedback is super important. Please choose a category below and send us your thoughts!"
             android:textAlignment="textStart"
             android:textColor="@color/colorAccent"
@@ -72,9 +71,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:background="@drawable/buttonbg"
-                app:mstbPrimaryColor="@color/colorAccent"
-                app:mstbSecondaryColor="?android:attr/colorBackgroundFloating"
+                app:mstbColorNotPressedBackground="?attr/colorBackgroundFloating"
+                app:mstbColorNotPressedText="@color/colorAccentLight"
+                app:mstbColorPressedBackground="@color/colorAccent"
+                app:mstbColorPressedText="@color/colorPrimary"
                 mstb:values="@array/feedback" />
 
         </LinearLayout>

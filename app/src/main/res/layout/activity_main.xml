@@ -77,11 +77,12 @@
             android:layout_height="38dp"
             android:layout_below="@+id/view"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/buttonbg"
             android:scaleX=".7"
             android:scaleY=".9"
-            app:mstbPrimaryColor="@color/colorAccent"
-            app:mstbSecondaryColor="?android:attr/colorBackgroundFloating"
+            app:mstbColorNotPressedBackground="?attr/colorBackgroundFloating"
+            app:mstbColorNotPressedText="@color/colorAccentLight"
+            app:mstbColorPressedBackground="@color/colorAccent"
+            app:mstbColorPressedText="@color/colorPrimary"
             mstb:values="@array/states" />
 
         <TextView

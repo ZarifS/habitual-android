@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId 'com.accentsoftware.habitual'
         minSdkVersion 21
         targetSdkVersion 25
-        versionName '1.0'
+        versionName '1.02'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 8
+        versionCode 10
     }
     buildTypes {
         release {
