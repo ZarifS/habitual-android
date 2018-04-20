@@ -7,4 +7,6 @@ Improve your productivity, self-awareness and overall lifestyle by incorporating
 
 Designed using Android Studio. 
 
+Link to Application on Google Play:https://play.google.com/store/apps/details?id=com.accentsoftware.habitual
 
+![Habitual Habit Tracker](screenshot.png)
