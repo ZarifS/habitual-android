@@ -46,7 +46,7 @@ public class Feedback extends AppCompatActivity {
             // TODO Auto-generated method stub
             super.onPreExecute();
             pd = new ProgressDialog(Feedback.this);
-            pd.setTitle("Sending Mail");
+            pd.setTitle("Sending Feedback");
             pd.setMessage("Please wait...");
             pd.setCancelable(false);
             pd.show();
@@ -64,7 +64,7 @@ public class Feedback extends AppCompatActivity {
             Log.i("doInBackground", params[0]);
             try {
                 if(sender.send()) {
-                    System.out.println("Message sent");
+                    System.out.println("Feedback sent.");
                     return 1;
                 } else {
                     return 2;

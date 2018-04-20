@@ -42,7 +42,7 @@
             android:id="@+id/info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="15dp"
             android:fontFamily="sans-serif-condensed"
             android:gravity="center"
             android:text="Habitual is an application developed by Accent Software. The purpose of the application is to allow users to maximise their time and goals by tracking them. By setting up habits that we follow through on we can develop powerful tools and skills. \n\nAlthough there are many other apps like this, we wanted to create a simple but beautiful interface to make users love creating new and better habits.\n\nThe app is still in its infancy and there are many other options we wish to add. Please leave us a rating on the app store with feedback to help us improve the application!"

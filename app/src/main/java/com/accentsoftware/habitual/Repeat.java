@@ -11,15 +11,27 @@ import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class Repeat extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener{
 
-    ArrayList<String> days = new ArrayList(7);
+    private ArrayList<String> days = new ArrayList(7);
+    private Map daysMap = new Hashtable();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repeat);
+        daysMap.put("M", 1);
+        daysMap.put("T", 2);
+        daysMap.put("W", 3);
+        daysMap.put("Th", 4);
+        daysMap.put("F", 5);
+        daysMap.put("S", 6);
+        daysMap.put("Su", 7);
         initCheckBoxes();
     }
 
@@ -62,12 +74,28 @@ public class Repeat extends AppCompatActivity implements CompoundButton.OnChecke
     }
 
     private String getDaysString() {
-        String res ="";
-        for(int i=0;i<days.size();i++){
-            res = res + days.get(i) + " ";
+        String repeat = "";
+        ArrayList<Integer> iDays = new ArrayList(7);
+        for (String s : days) {
+            iDays.add((Integer) daysMap.get(s));
         }
-        Log.i("getDaysString result:", res);
-        return res;
+        Collections.sort(iDays); //gets the sorted list
+
+        for (int i : iDays) {
+            repeat = repeat + getKeyFromValue(daysMap, i) + " ";
+        }
+
+        System.out.println(repeat);
+        return repeat;
+    }
+
+    public static Object getKeyFromValue(Map hm, Object value) {
+        for (Object o : hm.keySet()) {
+            if (hm.get(o).equals(value)) {
+                return o;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -136,7 +164,6 @@ public class Repeat extends AppCompatActivity implements CompoundButton.OnChecke
                 }
                 break;
         }
-        Log.i("Days:", days.toString());
     }
 
 }
