@@ -9,4 +9,4 @@ Designed using Android Studio.
 
 Link to Application on Google Play:https://play.google.com/store/apps/details?id=com.accentsoftware.habitual
 
-![Habitual Habit Tracker](screenshot.png){:height="50%" width="50%"}
+![Habitual Habit Tracker](screenshot.png)
