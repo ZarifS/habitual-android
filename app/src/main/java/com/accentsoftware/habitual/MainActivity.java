@@ -13,9 +13,6 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import org.honorato.multistatetogglebutton.MultiStateToggleButton;
 import org.honorato.multistatetogglebutton.ToggleButton;
 
@@ -30,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private RealmResults<Habit> habitsResults;
     private Realm realm;
     HabitAdapter adapter;
-    private AdView mAdView;
     private MultiStateToggleButton filterType;
     private TextView indicate;
 
@@ -38,38 +34,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // No ads enabled.
-        //initAds();
         setDefaultHabitReminder();
     }
 
-    //Used to initialize ads
-    private void initAds(){
-        mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder()
-//            .addTestDevice("745550807238A6B8EF5232342F3B9DFD")
-                .build();
-        // Start loading the ad in the background.
-        mAdView.loadAd(adRequest);
-    }
 
 
     /** Called when returning to the activity */
     @Override
     public void onResume() {
         super.onResume();
-        AdRequest adRequest = new AdRequest.Builder().build();
-        if (mAdView != null) {
-            mAdView.loadAd(adRequest);
-        }
     }
 
     /** Called before the activity is destroyed */
     @Override
     public void onDestroy() {
-        if (mAdView != null) {
-            mAdView.destroy();
-        }
         super.onDestroy();
     }
 
